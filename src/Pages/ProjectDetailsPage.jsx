@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Button } from "@/cardomponents/ui/button";
+import { Button } from "@/Components/ui/button"
 import { Progress } from "@/Components/ui/progress";
 
 

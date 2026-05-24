@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { TooltipProvider } from "@/Components/ui/tooltip";
+import { SidebarProvider, SidebarTrigger } from "@/Components/ui/sidebar";
 import AppSidebar from "@/Components/custom-components/Sidebar";
 import Navbar from "@/Components/custom-components/Navbar"; // Import your custom navbar
 

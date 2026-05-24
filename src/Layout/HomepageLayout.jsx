@@ -1,4 +1,4 @@
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/Components/ui/tooltip";
 import Navbar from "@/Components/custom-components/Navbar";
 import SiteFooter from "./Footer"
 export default function HomepageLayout({ children }) {
