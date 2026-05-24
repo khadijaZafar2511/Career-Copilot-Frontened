@@ -3,8 +3,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "@/Components/ui/accordion";
+import { Checkbox } from "@/Components/ui/checkbox";
 import { useState } from "react";
 
 export default function Tasks({ task }) {

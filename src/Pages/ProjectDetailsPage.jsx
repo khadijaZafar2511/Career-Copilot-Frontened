@@ -14,9 +14,9 @@ import {
   Send,
 } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Button } from "@/cardomponents/ui/button";
+import { Progress } from "@/Components/ui/progress";
 
 
 const projectApiResponse = {

@@ -1,5 +1,5 @@
 
- import { Card, CardContent, CardTitle } from "@/components/ui/card";
+ import { Card, CardContent, CardTitle } from "@/Components/ui/card";
 
 import ROADMAP_CARDS from "../../Data/dataRoadmap"
 

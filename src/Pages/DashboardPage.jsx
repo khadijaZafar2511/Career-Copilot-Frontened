@@ -1,5 +1,5 @@
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardTitle } from "@/Components/ui/card";
+import { Button } from "@/Components/ui/button";
 import { Link  } from "react-router-dom";
 import CareerPath from "../Components/custom-components/CareerPath";
 import { useState, useRef } from "react";

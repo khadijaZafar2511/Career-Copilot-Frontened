@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Badge } from "@/Components/ui/badge";
+import { Progress } from "@/Components/ui/progress";
+import { Button } from "@/Components/ui/button";
 import {Link} from "react-router-dom";
 export default function RoadmapCard({ roadmap }) {
   return (

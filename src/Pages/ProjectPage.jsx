@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { projectsData } from "../Data/projectdata";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Input } from "@/Components/ui/input";
+import { Button } from "@/Components/ui/button";
+import { Badge } from "@/Components/ui/badge";
+import { Card } from "@/Components/ui/card";
 import { Link } from "react-router-dom";
 import RoadmapBadge from "@/Components/custom-components/BadgeWithColor"
 export default function ProjectPage() {

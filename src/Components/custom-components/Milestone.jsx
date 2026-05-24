@@ -1,14 +1,14 @@
 
-import { Progress } from "@/components/ui/progress";
+import { Progress } from "@/Components/ui/progress";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+} from "@/Components/ui/accordion";
+import { Button } from "@/Components/ui/button";
 import  Tasks  from "@/Components/custom-components/Tasks"
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/Components/ui/badge";
 import { Link } from "react-router-dom";
 export default function Milestone({ mil }) {
 
