@@ -1,32 +1,32 @@
-import { Card, CardContent, CardTitle } from "@/Components/ui/card";
-import { Button } from "@/Components/ui/button";
-import { Link  } from "react-router-dom";
-import CareerPath from "../Components/custom-components/CareerPath";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import CareerPath from "../components/custom-components/CareerPath";
 import { useState, useRef } from "react";
 export default function DashboardPage() {
-  const [activeTab, setActiveTab]=useState(1)
+  const [activeTab, setActiveTab] = useState(1);
   const selectPath = [
     {
       id: 1,
-      title:"Career Path"
+      title: "Career Path",
     },
     {
       id: 2,
-      title:"Skill Assessment"
+      title: "Skill Assessment",
     },
     {
       id: 3,
-      title:"Set Goals"
+      title: "Set Goals",
     },
     {
       id: 4,
-      title:"Start Learning"
-    }
-  ]
+      title: "Start Learning",
+    },
+  ];
   const bottomref = useRef();
   const careerHandler = () => {
-     bottomref.current.scrollIntoView({ behavior: "smooth" });
-  }
+    bottomref.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <>
       <div className="p-4 flex items-center flex-col max-w-5xl md:max-w-6xl mx-auto">
@@ -62,7 +62,9 @@ export default function DashboardPage() {
                 >
                   {p.id}
                 </div>
-                <div className="md:text-sm text-[10px] md:font-semibold">{p.title}</div>
+                <div className="md:text-sm text-[10px] md:font-semibold">
+                  {p.title}
+                </div>
               </div>
             ))}
           </div>

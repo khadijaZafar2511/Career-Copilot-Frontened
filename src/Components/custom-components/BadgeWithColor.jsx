@@ -1,5 +1,4 @@
-import { Badge } from "@/Components/ui/badge";
-
+import { Badge } from "@/components/ui/badge";
 
 const roadmapColors = {
   Frontend: "bg-blue-100 text-blue-700 border-blue-200",

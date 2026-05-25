@@ -1,13 +1,13 @@
-import {UserSchema} from "../lib/validations/UserSchema"
+import { UserSchema } from "../lib/validations/UserSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // import { signupSchema } from "@/lib/validations/auth";
 import { toast } from "sonner";
-import { Input } from "@/Components/ui/input";
-import { Button } from "@/Components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Label } from "@/Components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
 export default function SignupPage() {
   const {
@@ -25,7 +25,7 @@ export default function SignupPage() {
       // 🔥 API CALL (connect backend later)
       // await axios.post("/api/auth/signup", data);
 
-    toast("Registered Successfully!!")
+      toast("Registered Successfully!!");
     } catch (err) {
       console.log(err);
     }

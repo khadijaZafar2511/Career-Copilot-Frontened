@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Button } from "@/Components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
 import { Loader2, Send } from "lucide-react";
 
@@ -9,8 +9,8 @@ import {
   Users,
   Sparkles,
   Briefcase,
-    BadgeDollarSign,
-    Bot,
+  BadgeDollarSign,
+  Bot,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 const mentorTopics = [
@@ -58,8 +58,6 @@ const mentorTopics = [
 ];
 
 export default function AImentorPage() {
-
-
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -122,115 +120,104 @@ export default function AImentorPage() {
     streamResponse(botId, fakeReply);
   };
 
+  const handleScroll = () => {
+    bottomRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  const username = "Khadija Zafar";
 
-
-    const handleScroll = () => {
-        bottomRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-const username = "Khadija Zafar";
-
-//   <div className="h-40 w-40 rounded-md bg-blue-100"><Bot/></div>
-    return (
-      <>
-        <div className="lg:max-w-6xl md:max-w-5xl  mx-auto flex items-center justify-center flex-col">
-          <div className=" flex md:gap-5 gap-2 md:w-4/5 bg-gray-50 w-full p-4">
-            <div className="px-3 md:p-4  h-17   rounded-md bg-blue-100 border border-blue-400 flex items-center justify-center">
-              <Bot size={40} />
-            </div>
-            <div>
-              <div className="text-3xl font-semibold text-blue-600 p-2">
-                Hi {username} ! 👋
-              </div>
-              <p className="text-sm">
-                Your personal AI Mentor — helping you navigate your career
-                journey with clarity, confidence, and personalized guidance.
-              </p>
-              <Button onClick={handleScroll} className="mt-3 h-13">
-                Start Conversation ➔
-              </Button>
-            </div>
+  //   <div className="h-40 w-40 rounded-md bg-blue-100"><Bot/></div>
+  return (
+    <>
+      <div className="lg:max-w-6xl md:max-w-5xl  mx-auto flex items-center justify-center flex-col">
+        <div className=" flex md:gap-5 gap-2 md:w-4/5 bg-gray-50 w-full p-4">
+          <div className="px-3 md:p-4  h-17   rounded-md bg-blue-100 border border-blue-400 flex items-center justify-center">
+            <Bot size={40} />
           </div>
+          <div>
+            <div className="text-3xl font-semibold text-blue-600 p-2">
+              Hi {username} ! 👋
+            </div>
+            <p className="text-sm">
+              Your personal AI Mentor — helping you navigate your career journey
+              with clarity, confidence, and personalized guidance.
+            </p>
+            <Button onClick={handleScroll} className="mt-3 h-13">
+              Start Conversation ➔
+            </Button>
+          </div>
+        </div>
 
-                
+        {/* chatbot conversation */}
+        <div className="w-full mt-5">
+          <div className="h-screen bg-slate-50 flex justify-center p-4">
+            {/* Chat Card */}
+            <div className="w-full max-w-3xl bg-white shadow-xl rounded-2xl flex flex-col overflow-hidden border">
+              {/* Header */}
+              <div className="px-5 py-4 border-b flex items-center gap-2 bg-white">
+                <Sparkles className="w-5 h-5 " />
+                <h1 className="font-semibold text-lg">AI Career Mentor</h1>
+              </div>
 
-                {/* chatbot conversation */}
-          <div className="w-full mt-5">
-            <div className="h-screen bg-slate-50 flex justify-center p-4">
-              {/* Chat Card */}
-              <div className="w-full max-w-3xl bg-white shadow-xl rounded-2xl flex flex-col overflow-hidden border">
-                {/* Header */}
-                <div className="px-5 py-4 border-b flex items-center gap-2 bg-white">
-                  <Sparkles className="w-5 h-5 " />
-                  <h1 className="font-semibold text-lg">AI Career Mentor</h1>
-                </div>
+              {/* Messages */}
+              <div className="flex-1 overflow-y-auto p-5 space-y-4">
+                {messages.length === 0 && (
+                  <div className="text-center text-gray-400 mt-10">
+                    Start a conversation with your AI mentor 🚀
+                  </div>
+                )}
 
-                {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-5 space-y-4">
-                  {messages.length === 0 && (
-                    <div className="text-center text-gray-400 mt-10">
-                      Start a conversation with your AI mentor 🚀
-                    </div>
-                  )}
-
-                  {messages.map((msg) => (
+                {messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`flex ${
+                      msg.role === "user" ? "justify-end" : "justify-start"
+                    }`}
+                  >
                     <div
-                      key={msg.id}
-                      className={`flex ${
-                        msg.role === "user" ? "justify-end" : "justify-start"
+                      className={`px-4 py-3 rounded-2xl text-sm max-w-[75%] whitespace-pre-wrap shadow-sm transition-all ${
+                        msg.role === "user"
+                          ? "bg-foreground text-white rounded-br-sm"
+                          : "bg-gray-100 text-gray-900 rounded-bl-sm border"
                       }`}
                     >
-                      <div
-                        className={`px-4 py-3 rounded-2xl text-sm max-w-[75%] whitespace-pre-wrap shadow-sm transition-all ${
-                          msg.role === "user"
-                            ? "bg-foreground text-white rounded-br-sm"
-                            : "bg-gray-100 text-gray-900 rounded-bl-sm border"
-                        }`}
-                      >
-                        {msg.content}
+                      {msg.content}
 
-                        {msg.streaming && (
-                          <span className="ml-1 animate-pulse">▋</span>
-                        )}
-                      </div>
+                      {msg.streaming && (
+                        <span className="ml-1 animate-pulse">▋</span>
+                      )}
                     </div>
-                  ))}
+                  </div>
+                ))}
 
-                  <div ref={bottomRef} />
-                </div>
+                <div ref={bottomRef} />
+              </div>
 
-                {/* Input Area */}
-                <div className="p-4 border-t bg-white flex gap-2 items-center">
-                  <input
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                    placeholder="Ask your AI mentor..."
-                    className="flex-1 px-4 py-3 text-sm rounded-xl border bg-slate-50 focus:outline-none focus:ring-1 focus:ring-foreground"
-                  />
+              {/* Input Area */}
+              <div className="p-4 border-t bg-white flex gap-2 items-center">
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                  placeholder="Ask your AI mentor..."
+                  className="flex-1 px-4 py-3 text-sm rounded-xl border bg-slate-50 focus:outline-none focus:ring-1 focus:ring-foreground"
+                />
 
-                  <button
-                    onClick={sendMessage}
-                    disabled={loading}
-                    className="bg-foreground text-white px-4 py-3 rounded-xl hover:opacity-90 transition flex items-center gap-2"
-                  >
-                    {loading ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <Send className="w-4 h-4" />
-                    )}
-                  </button>
-                </div>
+                <button
+                  onClick={sendMessage}
+                  disabled={loading}
+                  className="bg-foreground text-white px-4 py-3 rounded-xl hover:opacity-90 transition flex items-center gap-2"
+                >
+                  {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 }
-
-
-
-
-
-
-

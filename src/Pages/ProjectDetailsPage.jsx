@@ -1,8 +1,8 @@
-import ProjectOverview from "@/Components/custom-components/project-comp/ProjectOverview"
-import PractiseSkills from "@/Components/custom-components/project-comp/PractiseSkills";
-import ProjectTasks from "@/Components/custom-components/project-comp/ProjectTasks";
-import Resource from "@/Components/custom-components/project-comp/Resource";
-import SubmissionComponent from "@/Components/custom-components/project-comp/SubmissionComp"
+import ProjectOverview from "@/components/custom-components/project-comp/ProjectOverview";
+import PractiseSkills from "@/components/custom-components/project-comp/PractiseSkills";
+import ProjectTasks from "@/components/custom-components/project-comp/ProjectTasks";
+import Resource from "@/components/custom-components/project-comp/Resource";
+import SubmissionComponent from "@/components/custom-components/project-comp/SubmissionComp";
 import React, { useMemo, useState } from "react";
 import {
   Clock,
@@ -14,10 +14,9 @@ import {
   Send,
 } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Button } from "@/Components/ui/button"
-import { Progress } from "@/Components/ui/progress";
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 const projectApiResponse = {
   success: true,
@@ -76,84 +75,84 @@ const projectApiResponse = {
       "Animations",
       "Deployment",
     ],
- resources : [
-  {
-    _id: "res_201",
-    title: "MDN HTML Guide",
-    type: "reading",
-    platform: "MDN",
-    topic: "html",
-    url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-    isFree: true,
-    iconUrl: "https://cdn.simpleicons.org/html5",
-  },
+    resources: [
+      {
+        _id: "res_201",
+        title: "MDN HTML Guide",
+        type: "reading",
+        platform: "MDN",
+        topic: "html",
+        url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+        isFree: true,
+        iconUrl: "https://cdn.simpleicons.org/html5",
+      },
 
-  {
-    _id: "res_202",
-    title: "MDN CSS Guide",
-    type: "reading",
-    platform: "MDN",
-    topic: "css",
-    url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-    isFree: true,
-    iconUrl: "https://cdn.simpleicons.org/css",
-  },
+      {
+        _id: "res_202",
+        title: "MDN CSS Guide",
+        type: "reading",
+        platform: "MDN",
+        topic: "css",
+        url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+        isFree: true,
+        iconUrl: "https://cdn.simpleicons.org/css",
+      },
 
-  {
-    _id: "res_203",
-    title: "Flexbox Complete Guide",
-    type: "reading",
-    platform: "CSS Tricks",
-    topic: "flexbox",
-    url: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
-    isFree: true,
-    iconUrl: "https://cdn.simpleicons.org/css",
-  },
+      {
+        _id: "res_203",
+        title: "Flexbox Complete Guide",
+        type: "reading",
+        platform: "CSS Tricks",
+        topic: "flexbox",
+        url: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+        isFree: true,
+        iconUrl: "https://cdn.simpleicons.org/css",
+      },
 
-  {
-    _id: "res_204",
-    title: "CSS Grid Crash Course",
-    type: "video",
-    platform: "YouTube",
-    topic: "grid",
-    url: "https://www.youtube.com/watch?v=jV8B24rSN5o",
-    isFree: true,
-    iconUrl: "https://cdn.simpleicons.org/css",
-  },
+      {
+        _id: "res_204",
+        title: "CSS Grid Crash Course",
+        type: "video",
+        platform: "YouTube",
+        topic: "grid",
+        url: "https://www.youtube.com/watch?v=jV8B24rSN5o",
+        isFree: true,
+        iconUrl: "https://cdn.simpleicons.org/css",
+      },
 
-  {
-    _id: "res_205",
-    title: "MongoDB Documentation",
-    type: "docs",
-    platform: "MongoDB",
-    topic: "database",
-    url: "https://www.mongodb.com/docs/",
-    isFree: true,
-    iconUrl: "https://cdn.simpleicons.org/mongodb",
-  },
+      {
+        _id: "res_205",
+        title: "MongoDB Documentation",
+        type: "docs",
+        platform: "MongoDB",
+        topic: "database",
+        url: "https://www.mongodb.com/docs/",
+        isFree: true,
+        iconUrl: "https://cdn.simpleicons.org/mongodb",
+      },
 
-  {
-    _id: "res_206",
-    title: "React Documentation",
-    type: "docs",
-    platform: "React",
-    topic: "react",
-    url: "https://react.dev",
-    isFree: true,
-    iconUrl: "https://cdn.simpleicons.org/react",
-  },
+      {
+        _id: "res_206",
+        title: "React Documentation",
+        type: "docs",
+        platform: "React",
+        topic: "react",
+        url: "https://react.dev",
+        isFree: true,
+        iconUrl: "https://cdn.simpleicons.org/react",
+      },
 
-  {
-    _id: "res_207",
-    title: "Node.js Documentation",
-    type: "docs",
-    platform: "Node.js",
-    topic: "nodejs",
-    url: "https://nodejs.org/en/docs",
-    isFree: true,
-    iconUrl: "https://cdn.simpleicons.org/nodedotjs",
-  },
-],
+      {
+        _id: "res_207",
+        title: "Node.js Documentation",
+        type: "docs",
+        platform: "Node.js",
+        topic: "nodejs",
+        url: "https://nodejs.org/en/docs",
+        isFree: true,
+        iconUrl: "https://cdn.simpleicons.org/nodedotjs",
+      },
+    ],
     tasks: [
       {
         _id: "task_01",
@@ -419,7 +418,7 @@ const projectApiResponse = {
   },
 };
 
- const projectTabs = [
+const projectTabs = [
   {
     id: "overview",
     label: "Overview",
@@ -445,9 +444,8 @@ const projectApiResponse = {
   },
 ];
 
-
 export default function ProjectDetailsPage() {
- const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("overview");
 
   const project = projectApiResponse.data;
 
@@ -541,11 +539,7 @@ export default function ProjectDetailsPage() {
 
             {activeTab === "resources" && <Resource project={project} />}
 
-            {activeTab === "submission" && (
-              <SubmissionComponent  />
-            )}
-
-            
+            {activeTab === "submission" && <SubmissionComponent />}
           </div>
         </div>
       </div>

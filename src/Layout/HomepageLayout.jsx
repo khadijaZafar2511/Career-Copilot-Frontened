@@ -1,6 +1,6 @@
-import { TooltipProvider } from "@/Components/ui/tooltip";
-import Navbar from "@/Components/custom-components/Navbar";
-import SiteFooter from "./Footer"
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Navbar from "@/components/custom-components/Navbar";
+import SiteFooter from "./Footer";
 export default function HomepageLayout({ children }) {
   return (
     <TooltipProvider>
@@ -16,7 +16,7 @@ export default function HomepageLayout({ children }) {
           {children}
         </main>
       </div>
-       <SiteFooter />
+      <SiteFooter />
     </TooltipProvider>
   );
 }

@@ -1,23 +1,20 @@
-
-import { Progress } from "@/Components/ui/progress";
+import { Progress } from "@/components/ui/progress";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/Components/ui/accordion";
-import { Button } from "@/Components/ui/button";
-import  Tasks  from "@/Components/custom-components/Tasks"
-import { Badge } from "@/Components/ui/badge";
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import Tasks from "@/components/custom-components/Tasks";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 export default function Milestone({ mil }) {
-
   const totalTasks = mil.tasks.length;
   const completedTasks = mil.tasks.filter(
     (t) => t.status !== "not_started",
   ).length;
 
- 
   const progress = Math.round((completedTasks / totalTasks) * 100);
   const status = {
     completed: "bg-green-50 mb-2 text-green-400 p-2",
@@ -25,7 +22,6 @@ export default function Milestone({ mil }) {
     not_started: "bg-gray-100 text-gray-500 p-2",
   };
   function getMilestoneStatus() {
-  
     if (completedTasks === 0) return "not_started";
     if (completedTasks < totalTasks) return "in_progress";
     if (completedTasks === totalTasks) return "completed";
@@ -33,7 +29,6 @@ export default function Milestone({ mil }) {
   }
 
   const milestoneStatus = getMilestoneStatus(mil.tasks);
-
 
   function getProgressColor(value) {
     if (value >= 90) return "[&>div>div]:bg-green-500";
@@ -54,7 +49,7 @@ export default function Milestone({ mil }) {
                 </Badge>
               </div>
             </div>
-           
+
             <div className="flex flex-col md:flex-row gap-1 md:gap-2 mt-2">
               <div>
                 {`${completedTasks}/${totalTasks}`} <span>tasks completed</span>

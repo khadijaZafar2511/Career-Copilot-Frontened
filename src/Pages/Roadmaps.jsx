@@ -1,4 +1,4 @@
-import RoadmapCard from "../Components/custom-components/RoadmapCard";
+import RoadmapCard from "../components/custom-components/RoadmapCard";
 import ROADMAP_CARDS from "../Data/dataRoadmap";
 
 export default function Roadmaps() {

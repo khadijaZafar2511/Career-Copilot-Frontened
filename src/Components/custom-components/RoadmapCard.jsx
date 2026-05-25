@@ -1,8 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Badge } from "@/Components/ui/badge";
-import { Progress } from "@/Components/ui/progress";
-import { Button } from "@/Components/ui/button";
-import {Link} from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 export default function RoadmapCard({ roadmap }) {
   return (
     <Card className="rounded-2xl shadow-sm hover:shadow-md transition p-7  space-y-6 ">
@@ -50,7 +50,7 @@ export default function RoadmapCard({ roadmap }) {
         </p> */}
 
         {/* Button */}
-              <Link to={`/roadmaps/${roadmap.slug}`}>
+        <Link to={`/roadmaps/${roadmap.slug}`}>
           <Button className="p-5 w-full mt-4">View Roadmap</Button>
         </Link>
       </CardContent>

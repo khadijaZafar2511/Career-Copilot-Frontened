@@ -6,10 +6,9 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/Components/ui/select";
+} from "@/components/ui/select";
 
-
-export default function SelectItems({items}) {
+export default function SelectItems({ items }) {
   return (
     <Select items={items}>
       <SelectTrigger className="w-full max-w-82  h-11! bg-white ">

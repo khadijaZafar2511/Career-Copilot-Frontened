@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "@/Components/ui/button";
-import { Input } from "@/Components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGithub,
@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 
 // Data Arrays
-
 
 const BRAND_DATA = {
   name: "Career Copilot",
@@ -70,11 +69,6 @@ const LEGAL_LINKS = [
   { label: "Cookie Policy", href: "/cookies" },
 ];
 
-
-
-
-
-
 // 2. Component Structure
 export default function SiteFooter() {
   const handleSubmit = (e) => {
@@ -101,7 +95,7 @@ export default function SiteFooter() {
                 aria-label={label}
                 className="hover:text-foreground text-lg transition-colors"
               >
-                <FontAwesomeIcon icon={icon}  className="text-blue-600"/>
+                <FontAwesomeIcon icon={icon} className="text-blue-600" />
               </Link>
             ))}
           </div>
@@ -124,8 +118,6 @@ export default function SiteFooter() {
             ))}
           </div>
         ))}
-
-    
       </div>
 
       {/* Bottom Bar */}

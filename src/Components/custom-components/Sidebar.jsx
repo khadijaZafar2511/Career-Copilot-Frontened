@@ -19,7 +19,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/Components/ui/sidebar";
+} from "@/components/ui/sidebar";
 
 const items = [
   { title: "Home", url: "/", icon: Home },
@@ -35,7 +35,7 @@ export default function AppSidebar() {
   const location = useLocation();
 
   return (
-    <Sidebar >
+    <Sidebar>
       <SidebarContent className="mt-14 bg-white">
         <SidebarGroup>
           <SidebarGroupLabel className="p-2">CareerCopilot</SidebarGroupLabel>

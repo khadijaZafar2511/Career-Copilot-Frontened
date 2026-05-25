@@ -1,18 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Separator } from "@/Components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs";
-import {
-  CheckCircle2,
-  Circle,
-  Target,
-  BadgeCheck,
- 
-} from "lucide-react";
-
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CheckCircle2, Circle, Target, BadgeCheck } from "lucide-react";
 
 export default function ProjectOverview({ project }) {
-
   return (
     <div className="lg:col-span-8 space-y-6">
       <Card className="rounded-none border bg-white shadow-sm">
@@ -82,7 +73,6 @@ export default function ProjectOverview({ project }) {
       </Card>
 
       {/* Task Viewer */}
-    
     </div>
   );
 }

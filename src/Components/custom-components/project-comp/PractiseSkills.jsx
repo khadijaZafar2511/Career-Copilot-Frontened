@@ -1,7 +1,6 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Badge } from "@/Components/ui/badge";
-export default function PractiseSkills({project}) {
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+export default function PractiseSkills({ project }) {
   return (
     <div>
       <Card className="rounded-2xl border bg-white shadow-sm">

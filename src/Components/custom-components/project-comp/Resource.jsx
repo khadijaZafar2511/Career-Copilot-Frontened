@@ -1,11 +1,8 @@
-import { Card, CardContent } from "@/Components/ui/card";
-import { Button } from "@/Components/ui/button";
-import {
-  BookOpen,
-  ExternalLink,
-} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { BookOpen, ExternalLink } from "lucide-react";
 
-export default function Resource({project}) {
+export default function Resource({ project }) {
   return (
     <>
       <Card className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.08)]">

@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@/Components/ui/card";
-import { Badge } from "@/Components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   MdAssignment,
   MdPendingActions,
@@ -7,8 +7,8 @@ import {
   MdAutorenew,
 } from "react-icons/md";
 import { useState, useEffect } from "react";
-import SelectItems from "@/Components/custom-components/Selector"
-import Tasks from "@/Components/custom-components/Tasks"
+import SelectItems from "@/components/custom-components/Selector";
+import Tasks from "@/components/custom-components/Tasks";
 import { FaChartLine } from "react-icons/fa";
 // import { LuTrendingUp, LuLineChart } from "react-icons/lu";
 const items = [
@@ -21,36 +21,33 @@ const items = [
 ];
 
 export default function TasksPage() {
-    const [tasksData, setTasksData]=useState(null)
+  const [tasksData, setTasksData] = useState(null);
   // const [completedTasks, setCompletedTasks] = useState(0)
   // const [totalTasks, setTotalTasks] = useState(0)
   // const [pendingTasks, setPendingTasks] = useState(0)
-  
-    useEffect(() => {
-            const fetchdata = async () => {
-              const res = await fetch("/Tasksdata.json");
-              const data = await res.json();
-         const sortedTasks = [...data.tasks].sort((a, b) => {
-           const order = { in_progress: 0, not_started: 1, completed: 2 };
-           return order[a.status] - order[b.status];
-         })
-            //   console.log(sortedTasks.length)
-            //   const tasksCompleted = sortedTasks.filter((task) => task.status === "completed").length
-            //   const tasksPending = sortedTasks.filter((task) => task.status !== "completed").length
-            //   setCompletedTasks(tasksCompleted)
-            //   setPendingTasks(tasksPending)
-            // setTotalTasks(sortedTasks.length)
-              setTasksData({
-                ...data,
-                tasks: sortedTasks,
-              });
-               };
-     
-       fetchdata();
-      
 
+  useEffect(() => {
+    const fetchdata = async () => {
+      const res = await fetch("/Tasksdata.json");
+      const data = await res.json();
+      const sortedTasks = [...data.tasks].sort((a, b) => {
+        const order = { in_progress: 0, not_started: 1, completed: 2 };
+        return order[a.status] - order[b.status];
+      });
+      //   console.log(sortedTasks.length)
+      //   const tasksCompleted = sortedTasks.filter((task) => task.status === "completed").length
+      //   const tasksPending = sortedTasks.filter((task) => task.status !== "completed").length
+      //   setCompletedTasks(tasksCompleted)
+      //   setPendingTasks(tasksPending)
+      // setTotalTasks(sortedTasks.length)
+      setTasksData({
+        ...data,
+        tasks: sortedTasks,
+      });
+    };
 
-      }, []);
+    fetchdata();
+  }, []);
 
   return (
     <>
@@ -199,4 +196,3 @@ export default function TasksPage() {
     </>
   );
 }
-

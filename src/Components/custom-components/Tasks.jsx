@@ -3,18 +3,18 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/Components/ui/accordion";
-import { Checkbox } from "@/Components/ui/checkbox";
+} from "@/components/ui/accordion";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 
 export default function Tasks({ task }) {
-    const [checked, setChecked] = useState({});
-     const checkHandler = (taskid, value) => {
-       setChecked((prev) => ({
-         ...prev,
-         [taskid]: value,
-       }));
-     };
+  const [checked, setChecked] = useState({});
+  const checkHandler = (taskid, value) => {
+    setChecked((prev) => ({
+      ...prev,
+      [taskid]: value,
+    }));
+  };
   return (
     <div key={task.id} className=" rounded-xl  space-y-2">
       {/* Resources Dropdown */}
