@@ -1,6 +1,6 @@
 
 
-const FRONTEND_ROADMAP = {
+ const FRONTEND_ROADMAP = {
   id: "roadmap_frontend_001",
   title: "Frontend Developer Roadmap",
   slug: "frontend-developer",

@@ -17,14 +17,16 @@ export default function LoginPage() {
 
   const onSubmit = async (data) => {
     try {
-      console.log("Signup Data:", data);
+    
 
       // API CALL (connect backend later)
       // await axios.post("/api/auth/signup", data);
-
-      toast("Logged in successfully 🚀");
+toast.dismiss();
+      toast("Logged in successfully!! 🚀");
     } catch (err) {
       console.log(err);
+      toast.dismiss();
+       toast("Logged in failed!!");
     }
   };
 

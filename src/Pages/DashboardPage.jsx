@@ -1,8 +1,9 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Questions from "@/components/custom-components/Questions"
 import CareerPath from "../components/custom-components/CareerPath";
 import { useState, useRef } from "react";
+
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState(1);
   const selectPath = [
@@ -38,10 +39,14 @@ export default function DashboardPage() {
               <span>Start your </span>
               <span className="text-foreground">learning journey</span>
             </div>
-            <span>
+            <div>
               Choose a career path that excites you and let the AI create a
               personalized roadmap fro you
-            </span>
+              <br />{" "}
+              <span className="font-semibold text-md">
+                No experience needed • Personalized learning • Industry-focused
+              </span>
+            </div>
           </CardContent>
           <Button className="p-6 w-50" onClick={careerHandler}>
             Choose your career path ➔
@@ -58,7 +63,7 @@ export default function DashboardPage() {
               <div key={p.id} className="flex flex-col ">
                 <div
                   onClick={() => setActiveTab(p.id)}
-                  className={`h-8 w-8  border rounded-full flex items-center justify-center absolute  top-5 ${activeTab == p.id ? "bg-foreground text-white" : "bg-white"} `}
+                  className={`h-8 w-8  border rounded-full flex items-center justify-center absolute  top-5 ${activeTab==p.id ? "bg-foreground text-white" : "bg-white"} `}
                 >
                   {p.id}
                 </div>
@@ -70,8 +75,9 @@ export default function DashboardPage() {
           </div>
         </Card>
 
-        <Card className="px-8 py-4 w-full mt-2">
+        <Card className="px-4 md:px-8  py-4 w-full mt-2 bg-gray-50">
           {activeTab == 1 && <CareerPath />}
+          {activeTab ==2 && <Questions/>}
           <div ref={bottomref} />
         </Card>
       </div>

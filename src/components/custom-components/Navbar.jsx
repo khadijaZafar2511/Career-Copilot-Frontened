@@ -46,7 +46,9 @@ export default function Navbar() {
 
         {/* right content  */}
         <div className="hidden md:flex ">
-          <Button className=" p-4 h-11">Get Started</Button>
+          <Button className=" p-4 h-11">
+            <Link to="/dashboard">Get Started</Link>
+          </Button>
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
 import { Loader2, Send } from "lucide-react";

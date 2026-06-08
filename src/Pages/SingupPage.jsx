@@ -20,14 +20,16 @@ export default function SignupPage() {
 
   const onSubmit = async (data) => {
     try {
-      console.log("Signup Data:", data);
+     
 
       // 🔥 API CALL (connect backend later)
       // await axios.post("/api/auth/signup", data);
-
+toast.dismiss();
       toast("Registered Successfully!!");
     } catch (err) {
       console.log(err);
+      toast.dismiss();
+      toast("Registered failed!!");
     }
   };
 

@@ -12,7 +12,7 @@ import ResourcePage from "./Pages/ResourcePage";
 import ProjectDetailsPage from "./Pages/ProjectDetailsPage";
 import ProjectPage from "./Pages/ProjectPage";
 import AImentorPage from "./Pages/AImentorPage";
-
+import Setting from "./Pages/Setting"
 
 function App() {
   return (
@@ -43,7 +43,7 @@ function App() {
             <Route path="projects/:slug" element={<ProjectDetailsPage />} />
             <Route path="projects" element={<ProjectPage />} />
             <Route path="mentor" element={<AImentorPage />} />
-           
+            <Route path="setting" element={<Setting />} />
           </Route>
         </Routes>
       </BrowserRouter>
