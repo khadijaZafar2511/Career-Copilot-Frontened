@@ -128,3 +128,18 @@
     @apply font-sans;
     }
 }
+@layer base {
+  /* When dark mode is active, force utility classes to adapt */
+  .dark .bg-white {
+    background-color: var(--background) !important;
+  }
+  
+  .dark .text-black, 
+  .dark .text-slate-900 {
+    color: var(--foreground) !important;
+  }
+  
+  .dark .border-gray-200 {
+    border-color: var(--border) !important;
+  }
+}

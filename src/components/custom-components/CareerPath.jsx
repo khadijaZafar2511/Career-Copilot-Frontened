@@ -2,7 +2,7 @@ import { Card} from "@/components/ui/card";
 import { careerPaths } from "@/Data/CareerData";
 import { Badge } from "../ui/badge";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Sheet,
   SheetContent,
@@ -12,19 +12,25 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Separator } from "../ui/separator"
-export default function CareerPath() {
- const [selected, setSelected] = useState(" ")
+export default function CareerPath({ setActiveTab, setFilledtab,selected, setSelected }) {
 
-  const handleSelected = (title) => {
-    localStorage.setItem("selected", title);
-    setSelected(title)
+
+  const handleSelected = (cardDetail) => {
+    localStorage.setItem("selected", JSON.stringify(cardDetail));
+    setSelected(cardDetail)
+    // setSelected(prev => ({
+    //   ...prev, title:titl, description:shortDescription
+    // }));
   };
-  useEffect(() => { 
-     setSelected(localStorage.getItem("selected")?localStorage.getItem("selected"):"");
-  },[selected])
+  useEffect(() => {
+    setSelected(
+      JSON.parse(localStorage.getItem("selected"))
+        ? JSON.parse(localStorage.getItem("selected"))
+        : {},
+    );
+  }, []);
   return (
     <>
-
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-3">
         {careerPaths.map((card) => {
           return (
@@ -48,7 +54,7 @@ export default function CareerPath() {
                       <div className="w-full">
                         <div className="font-semibold  flex justify-between text-slate-900">
                           <p>{card.title}</p>
-                          {selected == card.title ? (
+                          {selected.title == card.title ? (
                             <Badge className="lg:w-22 lg:h-7">selected</Badge>
                           ) : (
                             ""
@@ -126,11 +132,24 @@ export default function CareerPath() {
                   </div>
                 </div>
                 <div
-                  onClick={() => handleSelected(card.title)}
+                  onClick={() =>
+                    handleSelected(card)
+                  }
                   className="ml-3 mr-3"
                 >
                   <Button className="w-full" type="submit">
-                    Select as Career
+                    <span
+                      onClick={() => (
+                        setActiveTab(3),
+                        setFilledtab((prev) =>
+                          prev.find((tab) => tab == 2)
+                            ? [...prev]
+                            : [...prev, 2],
+                        )
+                      )}
+                    >
+                      Select as Career
+                    </span>
                   </Button>
                 </div>
 
@@ -140,7 +159,6 @@ export default function CareerPath() {
           );
         })}
       </div>
-    
     </>
   );
 }

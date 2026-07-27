@@ -6,12 +6,12 @@ export const UserSchema = z.object({
     .string()
     .min(3, "Name must be atleast 3 character ")
     .nonempty("Name is required"),
-  username: z
-    .string()
-    .toLowerCase()
-    .min(3, "UserName is required")
-    .max(20, "Username too long")
-    .nonempty(" Username is required"),
+  // username: z
+  //   .string()
+  //   .toLowerCase()
+  //   .min(3, "UserName is required")
+  //   .max(20, "Username too long")
+  //   .nonempty(" Username is required"),
   email: z
     .email({ pattern: z.regexes.email }, "Enter a valid email")
     .toLowerCase()

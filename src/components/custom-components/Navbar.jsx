@@ -13,6 +13,7 @@ export default function Navbar() {
 
   return (
     <>
+      
       <div className="w-full bg-white border-b px-6 py-1 sticky top-0 z-50 flex items-center justify-between  ">
         {/* left side content */}
         <div>

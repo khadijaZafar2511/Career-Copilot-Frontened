@@ -1,15 +1,16 @@
 import { UserSchema } from "../lib/validations/UserSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// import { signupSchema } from "@/lib/validations/auth";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-
+import { useSignUp } from "@/Features/Auth/auth.mutation";
 export default function SignupPage() {
+
+
+
   const {
     register,
     handleSubmit,
@@ -18,19 +19,18 @@ export default function SignupPage() {
     resolver: zodResolver(UserSchema),
   });
 
+    const { mutate, isPending, isError, error } = useSignUp();
   const onSubmit = async (data) => {
-    try {
-     
-
-      // 🔥 API CALL (connect backend later)
-      // await axios.post("/api/auth/signup", data);
-toast.dismiss();
-      toast("Registered Successfully!!");
-    } catch (err) {
-      console.log(err);
+    mutate(data, {
+    onSuccess: () => {
       toast.dismiss();
-      toast("Registered failed!!");
+      toast.success("Registered successfully!!");
+    },
+    onError: (error) => {
+      toast.dismiss();
+      toast.error(error?.message || "Registration failed!!");
     }
+  });
   };
 
   return (
@@ -59,15 +59,7 @@ toast.dismiss();
               </p>
             </div>
 
-            {/* Username */}
-            <div className="space-y-2">
-              <Label className="text-gray-500 ">Username</Label>
-              <Input
-                className=" focus-visible:ring-1 focus-visible::ring-blue-500  focus:outline-none"
-                {...register("username")}
-              />
-              <p className="text-red-500 text-sm">{errors.username?.message}</p>
-            </div>
+         
 
             {/* Email */}
             <div className="space-y-2">
@@ -101,28 +93,15 @@ toast.dismiss();
               <p className="text-red-500 text-sm">{errors.bio?.message}</p>
             </div>
 
-            {/* Profile Image (optional) */}
-            <div className="space-y-2">
-              <Label className="text-gray-500 ">
-                Profile Image URL (optional)
-              </Label>
-              <Input
-                className=" focus-visible:ring-1 focus-visible::ring-blue-500  focus:outline-none"
-                {...register("profileImage")}
-              />
-              <p className="text-red-500 text-sm">
-                {errors.profileImage?.message}
-              </p>
-            </div>
-
-            {/* Submit */}
+         
             <Button
               type="submit"
               className="w-full h-12  text-white"
-              disabled={isSubmitting}
+              disabled={isPending}
             >
-              {isSubmitting ? "Creating account..." : "Sign Up"}
+              {isPending ? "Creating account..." : "Sign Up"}
             </Button>
+            <div>Already have an account?<a className="text-foreground " href="/login"> Login</a></div>
           </form>
         </CardContent>
       </Card>

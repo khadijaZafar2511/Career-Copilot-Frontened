@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
 import { Loader2, Send } from "lucide-react";
-
+import { useCurrentUser } from "@/Features/Auth/auth.query";
 import {
   Compass,
   FileText,
@@ -61,12 +61,17 @@ export default function AImentorPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-
+const [name,setName]=useState("Guest")
   const bottomRef = useRef(null);
-
+  const { data: user, isLoading } = useCurrentUser();
+  
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    if (user) {
+      setName(user.message);
+
+}
+  }, [messages,user]);
 
   const streamResponse = (id, text) => {
     let i = 0;
@@ -128,14 +133,14 @@ export default function AImentorPage() {
   //   <div className="h-40 w-40 rounded-md bg-blue-100"><Bot/></div>
   return (
     <>
-      <div className="lg:max-w-6xl md:max-w-5xl  mx-auto flex items-center justify-center flex-col">
+      <div className="md:px-10 px-2 flex items-center justify-center flex-col">
         <div className=" flex md:gap-5 gap-2 md:w-4/5 bg-gray-50 w-full p-4">
           <div className="px-3 md:p-4  h-17   rounded-md bg-blue-100 border border-blue-400 flex items-center justify-center">
             <Bot size={40} />
           </div>
           <div>
             <div className="text-3xl font-semibold text-blue-600 p-2">
-              Hi {username} ! 👋
+              Hi {name?name:"Guest"} ! 👋
             </div>
             <p className="text-sm">
               Your personal AI Mentor — helping you navigate your career journey

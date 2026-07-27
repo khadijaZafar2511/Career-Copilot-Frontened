@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 export default function RoadmapCard({ roadmap }) {
   return (
-    <Card className="rounded-2xl shadow-sm hover:shadow-md transition p-7  space-y-6 ">
+    <Card className="rounded-2xl shadow-sm hover:shadow-md transition p-6  space-y-6 ">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold flex items-center gap-2">
@@ -15,8 +15,11 @@ export default function RoadmapCard({ roadmap }) {
           {/* <Badge variant="secondary">{roadmap.level}</Badge> */}
         </div>
 
-        <p className="text-sm text-muted-foreground mt-2">
-          {roadmap.description}
+        <p className="text-sm text-muted-foreground mt-2 ">
+          {roadmap.description.length > 75
+            ? roadmap.description.slice(0, 75)
+            : roadmap.description}
+          .....
         </p>
       </CardHeader>
 
@@ -32,26 +35,13 @@ export default function RoadmapCard({ roadmap }) {
 
         {/* Duration */}
         <p className="text-sm ">
-          ⏳ Duration: <span className="font-medium">{roadmap.duration}</span>
+          ⏳ Duration: <span className="font-medium">{roadmap.estimatedDuration}</span>
         </p>
 
-        {/* Progress */}
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Progress</span>
-            <span className="font-medium">{roadmap.progress}%</span>
-          </div>
-          <Progress value={roadmap.progress} />
-        </div>
-
-        {/* Learners */}
-        {/* <p className="text-sm text-muted-foreground">
-          👥 {roadmap.learners} learners enrolled
-        </p> */}
 
         {/* Button */}
-        <Link to={`/roadmaps/${roadmap.slug}`}>
-          <Button className="p-5 w-full mt-4">View Roadmap</Button>
+        <Link to={`/roadmap/${roadmap._id}`}>
+          <Button className="p-5 w-full mt-4 cursor-pointer">View Roadmap</Button>
         </Link>
       </CardContent>
     </Card>

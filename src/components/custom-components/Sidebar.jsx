@@ -19,16 +19,16 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
 const items = [
   { title: "Home", url: "/", icon: Home },
-  { title: "Roadmaps", url: "/roadmaps", icon: Map },
+  { title: "MyRoadmaps", url: "/my-roadmap", icon: Map },
   { title: "Tasks", url: "/tasks", icon: CheckSquare },
   { title: "Resources", url: "/resources", icon: FolderOpen },
   { title: "Projects", url: "/projects", icon: Briefcase },
   { title: "AI mentor", url: "/mentor", icon: Sparkles },
-  { title: "Settings", url: "/setting", icon: Settings },
 ];
 
 export default function AppSidebar() {
@@ -39,6 +39,7 @@ export default function AppSidebar() {
       <SidebarContent className="mt-14 bg-white">
         <SidebarGroup>
           <SidebarGroupLabel className="p-2">CareerCopilot</SidebarGroupLabel>
+          {/* <SidebarTrigger /> */}
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col gap-3">
               {items.map((item) => {

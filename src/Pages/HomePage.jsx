@@ -55,7 +55,7 @@ export default function HomePage() {
           </span>
         </div>
 
-        <p className="text-sm">
+        <p className="text-xs md:text-sm ">
           Personalized roadmaps, AI mentor , project ideas , <br /> quizzes and
           skill tracking __ all in one platform
         </p>
@@ -73,7 +73,7 @@ export default function HomePage() {
         </div>
 
         {/* card area */}
-        <div className="bg-gray-50  h-full w-full py-5 mt-7 px-8">
+        <div className="bg-gray-50  h-full w-full py-5 mt-7 lg:px-8 px-3">
           <div className="md:text-2xl text-xl mb-6 font-semibold text-center">
             {" "}
             Everything You Need to Grow
