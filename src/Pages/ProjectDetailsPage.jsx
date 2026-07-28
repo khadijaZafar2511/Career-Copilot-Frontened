@@ -47,9 +47,9 @@ const projectTabs = [
 
 export default function ProjectDetailsPage() {
    const { id } = useParams();
-  const { mutate, data, isLoading:isStarting } = useStartProject(id);
-
   const [activeTab, setActiveTab] = useState("tasks");
+   const { mutate, data, isLoading: isStarting } = useStartProject(id);
+    const { enforceAuth } = useRequireAuth();
   const { data: project, isLoading } = useProjectDetail(id);
     if (isLoading)
       return (
@@ -60,7 +60,7 @@ export default function ProjectDetailsPage() {
           </h1>
         </div>
       );
-  const {enforceAuth}=useRequireAuth()
+
 
   // console.log(project);
 
