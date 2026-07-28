@@ -12,7 +12,15 @@ export default function ProjectPage() {
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const { data: projectsData, isLoading } = useAllProject();
-  if(isLoading) return <div> loading projects .....</div>
+    if (isLoading)
+      return (
+        <div className="  flex  flex-col mt-25 items-center justify-center ">
+          <img className="h-10 w-10" src="/loading1.gif" />
+          <h1 className="font-semibold text-2xl mt-15">
+            Loading Projects ......
+          </h1>
+        </div>
+      );
 // console.log(projectsData);
   const filters = ["All", "Frontend", "Backend", "Full Stack", "AI", "DevOps"];
 
@@ -28,6 +36,8 @@ export default function ProjectPage() {
     return matchSearch && matchFilter;
   }):[];
 
+
+  
   return (
     <>
       <div className="md:px-5  px-2 ">

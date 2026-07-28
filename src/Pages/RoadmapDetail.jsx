@@ -30,7 +30,15 @@ export default function RoadmapDetail() {
  
   
 
-  if (isLoadingRoadmap) return <div>loading roadmap.....</div>
+  if (isLoadingRoadmap) 
+      return (
+        <div className="  flex  flex-col mt-25 items-center justify-center ">
+          <img className="h-10 w-10" src="/loading1.gif" />
+          {/* <h1 className="font-semibold text-2xl mt-15">
+            Loading Dashboard ......
+          </h1> */}
+        </div>
+      );
  
   const isAlreadySelected = roadmap?.status === "active";
  

@@ -51,8 +51,17 @@ export default function ProjectDetailsPage() {
 
   const [activeTab, setActiveTab] = useState("tasks");
   const { data: project, isLoading } = useProjectDetail(id);
+    if (isLoading)
+      return (
+        <div className="  flex  flex-col mt-25 items-center justify-center ">
+          <img className="h-10 w-10" src="/loading1.gif" />
+          <h1 className="font-semibold text-2xl mt-15">
+            Loading Project Detail ......
+          </h1>
+        </div>
+      );
   const {enforceAuth}=useRequireAuth()
-  if (isLoading) return <div> Loading  project detail ....</div>
+
   // console.log(project);
 
   const buttonContent =
@@ -61,7 +70,10 @@ export default function ProjectDetailsPage() {
   const resources = project?.tasks.flatMap(task => task.resources)
   const handlerStartProject = (project) => {
 mutate(project._id)
-}
+  }
+  
+  
+
   return (
     <div className="min-h-screen bg-white max-w-5xl  lg:max-w-6xl  mx-auto   rounded-md  p-2 ">
       <div className="max-w-5xl mx-auto lg:max-w-6xl ">
