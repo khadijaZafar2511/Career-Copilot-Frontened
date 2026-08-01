@@ -148,22 +148,25 @@ const sendMessage = async () => {
   setIsStreaming(true);
 
   try {
-    const response = await fetch("http://localhost:3000/ai/chat", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: question,
-        userContext: {
-          name: user?.name || "Guest",
-          careerGoal: user?.goal?.career,
-          skillLevel: user?.goal?.skillLevel,
-          roadmap: user?.activeRoadmap,
+    const response = await fetch(
+      "https://career-copilot-backened.onrender.com/ai/chat",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    });
+        body: JSON.stringify({
+          message: question,
+          userContext: {
+            name: user?.name || "Guest",
+            careerGoal: user?.goal?.career,
+            skillLevel: user?.goal?.skillLevel,
+            roadmap: user?.activeRoadmap,
+          },
+        }),
+      },
+    );
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
@@ -248,7 +251,7 @@ const sendMessage = async () => {
   const handleTopicClick = (topic) => {
     setInput(`Help me with ${topic}`);
   };
-
+console.log(JSON.stringify(messages));
   return (
     <div className="px-3 md:px-10">
       {/* Header */}
@@ -427,10 +430,36 @@ ${msg.role === "user" ? "bg-foreground text-white" : "bg-gray-100 border"}
 `}
               >
                 {msg.role === "assistant" ? (
-                  <div className="prose prose-sm max-w-none dark:prose-invert">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                      {msg.content}
-                    </ReactMarkdown>
+                <div
+  className="
+    prose
+    prose-slate
+    dark:prose-invert
+    max-w-none
+
+    prose-headings:mt-8
+    prose-headings:mb-4
+
+    prose-p:my-4
+
+    prose-ul:my-4
+    prose-ul:pl-6
+
+    prose-ol:my-4
+    prose-ol:pl-6
+
+    prose-li:my-2
+
+    prose-pre:my-6
+    prose-code:text-sm
+  "
+>
+  <ReactMarkdown
+    remarkPlugins={[remarkGfm]}
+  >
+    {msg.content}
+  </ReactMarkdown>
+
 
                     {msg.streaming && (
                       <span className="inline-block w-2 h-2 rounded-full bg-current animate-pulse ml-1 align-middle" />
