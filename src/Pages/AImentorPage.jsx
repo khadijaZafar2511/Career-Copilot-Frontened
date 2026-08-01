@@ -148,25 +148,22 @@ const sendMessage = async () => {
   setIsStreaming(true);
 
   try {
-    const response = await fetch(
-      "https://career-copilot-backened.onrender.com/ai/chat",
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: question,
-          userContext: {
-            name: user?.name || "Guest",
-            careerGoal: user?.goal?.career,
-            skillLevel: user?.goal?.skillLevel,
-            roadmap: user?.activeRoadmap,
-          },
-        }),
+    const response = await fetch("https://career-copilot-backened.onrender.com/ai/chat", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        message: question,
+        userContext: {
+          name: user?.name || "Guest",
+          careerGoal: user?.goal?.career,
+          skillLevel: user?.goal?.skillLevel,
+          roadmap: user?.activeRoadmap,
+        },
+      }),
+    });
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
