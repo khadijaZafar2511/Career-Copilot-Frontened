@@ -5,17 +5,7 @@ import { FaSun, FaMoon, FaCloudSun } from "react-icons/fa";
 import { FaRocket, FaRegClock, FaLeaf } from 'react-icons/fa';
 import {Button} from "@/components/ui/button"
 export default function SetGoal({ selected, setActiveTab, setFilledtab, setGoalData , goalData }) {
-  // const [goalData, setGoalData] = useState({
-  //   career: selected ? selected.title : "",
-  //   roadmapId: selected ? selected.slug : "",
-  //   skillLevel: "beginner",
-  //   TargetPace:"",
-  //   weeklyHours: "",
-  //   timeline: "",
-  //  dailyReminder:""
-  // });
-
-  // const [goalData,setGoalData]=useState({})
+ 
   const studyTimeData = [
     {
       time: "Morning",

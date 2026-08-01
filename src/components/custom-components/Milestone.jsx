@@ -18,7 +18,11 @@ export default function Milestone({ mil, selected, roadmapId }) {
   const hasShownToast = useRef(false);
   const {updateStreak}=useStreak()
   const {mutate, data: startQuiz, isLoading } = useStartQuiz();
-
+if(isLoading) return (
+  <div className="  flex  flex-col mt-25 items-center justify-center ">
+    <img className="h-10 w-10" src="/loading1.gif" />
+  </div>
+);
   const quizHandler = () => {
     mutate(mil._id, {
       onSuccess: (startQuiz) => {
@@ -61,7 +65,7 @@ const status = {
     <>
       <div
         key={mil._id}
-        className={`rounded-2xl text-sm bg-white shadow-sm md:px-4 px-2  text-gray-500  ${mil.status === "locked" ? "cursor-not-allowed" : ""}`}
+        className={`rounded-2xl text-sm bg-white shadow-sm md:px-4 px-1  text-gray-500  ${mil.status === "locked" ? "cursor-not-allowed" : ""}`}
       >
         <Accordion
           type="single"
@@ -70,7 +74,7 @@ const status = {
           <AccordionItem value={mil._id} disabled={mil.status === "locked"}>
             <div>
               <div className="md:text-lg  text-md font-semibold flex justify-between mt-4">
-                <span className="text-foreground">{mil.title}</span>
+                <span className="text-foreground px-1 ">{mil.title}</span>
 
                 <Badge className={status[mil.status]}>
                   {mil.status === "locked" ? `${mil.status} 🔒︎` : mil.status}
@@ -87,20 +91,28 @@ const status = {
                 value={progress || 1}
               />
             </div>
-            <AccordionTrigger className="cursor-pointer"></AccordionTrigger>
+            <AccordionTrigger className="cursor-pointer py-0"></AccordionTrigger>
             {/* content dropdown */}
             <AccordionContent
               className={`flex flex-col gap-2 ${mil.status === "locked" ? "cursor-not-allowed" : ""}`}
             >
               <div className="flex flex-col gap-2">
-                {mil.tasks.map((task) => (
-                  <Tasks
-                    task={task}
-                    key={task._id}
-                    selected={selected}
-                    roadmapId={roadmapId}
-                  />
-                ))}
+                {mil.tasks.map((task,index) => {
+                const firstIncompleteIndex = mil.tasks.findIndex(
+                  (task) => task.status !== "completed",
+                  );
+                  const isLocked = index > firstIncompleteIndex;
+                
+                  return (
+                    <Tasks
+                      task={task}
+                      key={task._id}
+                      selected={selected}
+                      roadmapId={roadmapId}
+                      isLocked={isLocked}
+                    />
+                  )
+                })}
               </div>
 
               <div className="flex gap-2 py-6 ">

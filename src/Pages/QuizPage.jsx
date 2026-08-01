@@ -9,6 +9,7 @@ import { useParams, useLocation } from "react-router-dom";
 import QuizResultModal from "../components/custom-components/QuizPopup"
 export default function QuizPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [quizResult, setQuizResult] = useState(null);
   const location = useLocation();
   const quizdata = location.state;
@@ -49,7 +50,8 @@ export default function QuizPage() {
 
   const question = quiz.questions[currentQuestion];
 
-  function selectAnswer(option,questionid) {
+  function selectAnswer(option, questionid) {
+  
     setAnswers(
       (prev) => {
         const safePrev = prev || [];
@@ -101,40 +103,46 @@ export default function QuizPage() {
 
       {/* Question */}
 
-      <Card className="lg:col-span-2">
-        <CardContent className="space-y-6 p-8">
-          <h2 className="text-lg font-semibold leading-relaxed text-foreground">
+      <Card className="lg:col-span-2 border border-blue-200">
+        <CardContent className="space-y-6 md:p-8 p-4 ">
+          <h2 className="text-base  font-semibold leading-relaxed text-foreground">
             {question.question}
           </h2>
 
           <div className="space-y-4">
             {question.options.map((option, index) => {
-              const selected = answers[currentQuestion] === index;
+              // 1. Find the saved answer object for this specific question
+              const currentAnswer = answers?.find(
+                (ans) => ans?.questionId === question._id,
+              );
+
+              // 2. Compare the saved string with the current option's text string
+              const selected =
+                currentAnswer && currentAnswer.option === option.text;
 
               return (
                 <button
                   key={index}
-                  onClick={() => selectAnswer(option, question._id)}
-                  className={`w-full rounded-xl border p-2 text-left transition-all
-
-                  ${
+                  onClick={() => selectAnswer(option, question._id)} // Pass the full option object here
+                  className={`w-full rounded-xl border p-2 text-left transition-all ${
                     selected
-                      ? "border-primary bg-primary/10"
-                      : "hover:border-primary/50"
-                  }
-                  `}
+                      ? "border-primary bg-primary/10 font-medium"
+                      : "hover:border-primary/50 border-gray-200"
+                  }`}
                 >
                   <div className="flex items-center gap-4">
                     <div
-                      className={`flex h-6 w-6 items-center justify-center rounded-full border font-medium
-
-                      ${selected ? "border-primary bg-primary text-white" : ""}
-                      `}
+                      className={`flex h-6 w-6 items-center justify-center rounded-full border text-xs font-semibold transition-colors ${
+                        selected
+                          ? "border-primary bg-primary text-white"
+                          : "border-gray-300 text-gray-600"
+                      }`}
                     >
                       {String.fromCharCode(65 + index)}
                     </div>
-
-                    <span className="text-sm">{option.text}</span>
+                    <span className="text-xs md:text-sm text-gray-700">
+                      {option.text}
+                    </span>
                   </div>
                 </button>
               );
@@ -153,7 +161,7 @@ export default function QuizPage() {
 
             {currentQuestion === totalQuestions - 1 ? (
               <Button className="p-5" onClick={submitQuiz}>
-                Submit Quiz
+                {isSubmitting ? "Submitting" : "Submit Quiz"}
               </Button>
             ) : (
               <Button className="p-5" onClick={nextQuestion}>

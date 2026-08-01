@@ -7,7 +7,7 @@ import { useEffect ,useState} from "react";
 import { useRoadmap } from "../Features/Roadmap/Roadmap.query";
 import {useSelectRoadmap } from "../Features/Roadmap/roadmap.mutation"
 import { useRequireAuth } from "../hooks/use-require-auth"
-import { toast } from "sonner"
+
 import {Link} from "react-router-dom"
 export default function RoadmapDetail() {
 
@@ -80,7 +80,7 @@ export default function RoadmapDetail() {
       {/* {console.log(roadmap)} */}
       {roadmap && (
         <div className="relative  w-full lg:max-w-6xl md:max-w-5xl rounded-md  max-w-3xl mx-auto flex lg:flex-row flex-col  bg-white  p-2">
-          <div className="md:px-4 px-2  py-1  ">
+          <div className="md:px-4   py-1  ">
             <div className="flex justify-between">
               <div className="mb-3">Version v.{roadmap.version}</div>
               <button
@@ -88,7 +88,11 @@ export default function RoadmapDetail() {
                 disabled={isSelecting}
                 className=" h-8 w-20   lg:font-semibold lg:h-9 lg:w-25 text-xs rounded  border border-foreground text-foreground hover:bg-foreground hover:text-white cursor-pointer"
               >
-                {roadmap.status === "active" ? "SELECTED" : "SELECT"}
+                {roadmap.status === "active"
+                  ? "SELECTED"
+                  : isSelecting
+                    ? "Selecting"
+                    : roadmap.status==="completed"?"COMPLETED":"SELECT"}
               </button>
             </div>
             {/* header Content */}
@@ -103,14 +107,14 @@ export default function RoadmapDetail() {
                     {roadmap.title}
                   </span>
                 </div>
-                <div className="text-gray-700 text-sm">
+                <div className="text-gray-700 md:text-sm text-xs ">
                   {roadmap.description}
                 </div>
               </div>
             </div>
 
             {/* lower conetnt */}
-            <div className="flex w-full  gap-5">
+            <div className="flex w-full  gap-3  ">
               <div className="bg-gray-200 w-0.5   mt-22 min-h-full"></div>
 
               <div className="flex  flex-col gap-3 rounded w-full mt-10 ">
@@ -119,7 +123,7 @@ export default function RoadmapDetail() {
                   .map((mil) => (
                     // <>
                     <div className="flex" key={mil._id}>
-                      <div className=" h-5 w-5 text-[12px]  border bg-foreground rounded-xl absolute left-3 md:left-4 mt-12 text-white text-center">
+                      <div className=" h-5 w-5 text-[12px]  border bg-foreground rounded-xl absolute left-0  md:left-4 mt-12 text-white text-center">
                         {mil.order}
                       </div>
                       <div className="border border-gray-300 rounded-md w-full">
@@ -136,7 +140,7 @@ export default function RoadmapDetail() {
             </div>
             <Link to={`/projects/${roadmap._id}/detail`}>
               <Button className="px-4 py-5   mt-5 w-1/2 border border-foreground text-foreground bg-white hover:bg-foreground hover:text-white cursor-pointer ">
-               View Project
+                View Project
               </Button>
             </Link>
           </div>

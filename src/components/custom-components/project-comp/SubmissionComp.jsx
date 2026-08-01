@@ -37,7 +37,7 @@ export default function SubmissionComponent({ projectId }) {
   }
   
   const onSubmit = (data) => {
-   
+   console.log(data)
      const formData = new FormData();
 
      // 1. Append regular text fields
@@ -65,7 +65,7 @@ export default function SubmissionComponent({ projectId }) {
       { projectId,formData},
       {
         onSuccess: (data1) => {
-          // console.log(data1, "backene");
+          console.log(data1, "backene");
         },
       },
     );
@@ -114,8 +114,8 @@ const onError = (errors) => {
       </div>
 
       {/* FORM AREA */}
-      <form onSubmit={enforceAuth(()=>handleSubmit(onSubmit, onError))}>
-        <div className="border rounded-2xl p-6 text-black  bg-white space-y-5">
+      <form onSubmit={enforceAuth(handleSubmit(onSubmit, onError))}>
+        <div className=" md:p-6  py-6  text-black  bg-white space-y-5">
           {/* TITLE */}
           <div>
             <label className="text-sm font-medium">Submission Title</label>

@@ -10,8 +10,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { useRequireAuth } from "../../hooks/use-require-auth"
 import {useTaskSelect} from "../../Features/Tasks/tasks.mutation"
-
-export default function Tasks({ task, selected,roadmapId }) {
+import { useRef } from "react";
+export default function Tasks({ task, selected,roadmapId,isLocked }) {
    const { enforceAuth } = useRequireAuth();
 
 const status = {
@@ -25,47 +25,67 @@ const status = {
     "bg-gray-200 text-gray-500 border border-gray-200 rounded-full p-2 mb-2  font-semibold  cursor-not-allowed",
   };
 
-  const { mutate, data, isPending } = useTaskSelect();
- const isTaskDone = task.status === "completed";
+  const { mutateAsync, data, isPending } = useTaskSelect();
+
+
+
+
+
+const queueRef = useRef(Promise.resolve());
+
+function enqueue(payload) {
+  queueRef.current = queueRef.current
+    .then(() => mutateAsync(payload))
+    .catch((err) => {
+      console.error(err);
+    });
+
+  return queueRef.current;
+}
   const checkHandler =async (task) => {
-    if(isTaskDone){
-      toast.dismiss()
-      toast("You have already completed it!!")
-      return;
-    }
-    else {
-      mutate(  { selected, task,roadmapId })
-    
-    } 
+   if (task.status === "completed") {
+     toast.dismiss();
+     toast("You have already completed it!!");
+     return;
+   } else {
+     enqueue({ selected, task, roadmapId });
+   } 
   
   };
+
+  
+
   return (
-    
-    <div key={task._id} className=" rounded-xl flex space-y-2 gap-2">
+    <div key={task._id} className=" rounded-xl flex space-y-2 md:gap-2 gap-1 ">
       <div className="flex items-center ">
         <Checkbox
           className="border rounded-xl border-gray-500"
-          checked={isTaskDone}
+          disabled={isPending || isLocked}
+          checked={task.status === "completed"}
           onCheckedChange={enforceAuth(() => checkHandler(task))}
         />
       </div>
       {/* Resources Dropdown */}
-      <Card className="w-full border px-2">
+      <Card className="w-full border px-2 py-2 ">
         <Accordion type="single" collapsible="true">
           <AccordionItem value={task.id}>
             <div className="flex lg:h-6 justify-between flex-col lg:flex-row">
               <div className="flex gap-2  items-center text-gray-500">
                 <span>{task.order}-</span>
-                <span className="font-medium ">{task.title} </span>
+                <span className="font-medium text-xs md:text-sm ">
+                  {task.title}{" "}
+                </span>
                 <Badge
                   className={
-                    status[isTaskDone ? "completed" : task.status]
+                    status[
+                      task.status === "completed" ? "completed" : task.status
+                    ]
                   }
                 >
-                  {isTaskDone ? "completed" : task.status}
+                  {task.status === "completed" ? "completed" : task.status}
                 </Badge>
               </div>
-              <AccordionTrigger className="text-sm  text-foreground">
+              <AccordionTrigger className="text-sm  p-1  text-foreground">
                 View Resources
               </AccordionTrigger>
             </div>

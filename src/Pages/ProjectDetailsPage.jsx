@@ -1,14 +1,9 @@
-import ProjectOverview from "@/components/custom-components/project-comp/ProjectOverview";
-import PractiseSkills from "@/components/custom-components/project-comp/PractiseSkills";
+
 import ProjectTasks from "@/components/custom-components/project-comp/ProjectTasks";
 import Resource from "@/components/custom-components/project-comp/Resource";
 import SubmissionComponent from "@/components/custom-components/project-comp/SubmissionComp";
-import React, { useMemo, useState } from "react";
+import React, {  useState } from "react";
 import {
-  Clock,
-  Trophy,
-  Sparkles,   
-  LayoutDashboard,
   CheckSquare,
   BookOpen,
   Send,
@@ -48,9 +43,11 @@ const projectTabs = [
 export default function ProjectDetailsPage() {
    const { id } = useParams();
   const [activeTab, setActiveTab] = useState("tasks");
-   const { mutate, data, isLoading: isStarting } = useStartProject(id);
+  const { mutate, data, isLoading: isStarting } = useStartProject(id);
+  console.log(id)
     const { enforceAuth } = useRequireAuth();
   const { data: project, isLoading } = useProjectDetail(id);
+  // console.log(project)
     if (isLoading)
       return (
         <div className="  flex  flex-col mt-25 items-center justify-center ">
@@ -79,7 +76,7 @@ mutate(project._id)
       <div className="max-w-5xl mx-auto lg:max-w-6xl ">
         {/* Header */}
         <Card className=" shadow-none  border-none rounded-none  bg-white">
-          <CardContent className="px-6 ">
+          <CardContent className="md:px-6 px-3  ">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  ">
               <div className="space-y-3 w-full">
                 <h1 className="text-2xl font-bold text-foreground ">
@@ -89,7 +86,7 @@ mutate(project._id)
                 <p className="text-slate-600 max-w-3xl">
                   {project.description}
                 </p>
-                <div className="flex gap-9 ">
+                <div className="grid md:grid-cols-3 grid-cols-1  md:gap-9  gap-2">
                   <p>
                     <span>Estimated Duration :</span> 🕒{" "}
                     {project.estimatedDuration.value}{" "}
@@ -114,7 +111,7 @@ mutate(project._id)
                 <div className="flex justify-end w-full ">
                   <Button
                     onClick={enforceAuth(() => handlerStartProject(project))}
-                    className="w-1/3  rounded-md h-10  bg-foreground "
+                    className="md:w-1/3 w-1/2 rounded-md h-10  bg-foreground "
                   >
                     {project && project.status
                       ? buttonContent
@@ -139,7 +136,7 @@ mutate(project._id)
           </CardContent>
         </Card>
 
-        <div className="flex flex-wrap gap-2   border  bg-white p-2 shadow-sm">
+        <div className="grid grid-cols-3 border  bg-white p-2 shadow-sm">
           {projectTabs.map((tab) => {
             const Icon = tab.icon;
 
@@ -147,7 +144,7 @@ mutate(project._id)
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center text-gray-500  gap-2 px-4 py-2 rounded-lg transition ${
+                className={`flex items-center text-gray-500 gap-1  md:gap-2 md:px-4 py-2 p-1  rounded-lg transition ${
                   activeTab === tab.id
                     ? "bg-slate-200  text-foreground"
                     : "hover:bg-slate-100"

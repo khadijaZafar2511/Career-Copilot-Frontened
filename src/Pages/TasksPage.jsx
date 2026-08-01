@@ -1,14 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Circle } from "rc-progress";
 import {
   MdAssignment,
   MdPendingActions,
   MdCheckCircle,
-  MdAutorenew,
+
 } from "react-icons/md";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Button } from "@/components/ui/button";
-import { FaChartLine } from "react-icons/fa";
 import { useActiveRoadmap } from "@/Features/Roadmap/Roadmap.query";
 import { Badge } from "@/components/ui/badge";
 const items = [
@@ -42,7 +41,12 @@ const[activeFilter,setActiveFilter]=useState("all")
       "in_progress",
       "locked"
     ];
-  if (isLoading) return <div> Loading task ....</div>
+  if (isLoading)
+    return (
+      <div className="  flex  flex-col mt-25 items-center justify-center ">
+        <img className="h-10 w-10" src="/loading1.gif" />
+      </div>
+    );
   if(!activeRoadmap) return <div> You have no active Roadmap yet !</div>
   const progress = Math.round((activeRoadmap.completedTasks / activeRoadmap.totalTasks) * 100)
   const allTasks = activeRoadmap.milestones.flatMap(milestone => milestone.tasks)

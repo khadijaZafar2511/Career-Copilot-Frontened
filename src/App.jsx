@@ -1,46 +1,56 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignupPage from "./Pages/SingupPage";
-import LoginPage from "./Pages/LoginPage";
-import HomePage from "./Pages/HomePage";
-import DashboardPage from "./Pages/DashboardPage";
-import PageLayout from "./Layout/PageLayout";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "sonner";
+
 import HomepageLayout from "./Layout/HomepageLayout";
-import Roadmaps from "./Pages/Roadmaps";
-import RoadmapDetail from "./Pages/RoadmapDetail";
-import TasksPage from "./Pages/TasksPage";
-import ResourcePage from "./Pages/ResourcePage";
-import ProjectDetailsPage from "./Pages/ProjectDetailsPage";
-import ProjectPage from "./Pages/ProjectPage";
-import AImentorPage from "./Pages/AImentorPage";
-import Setting from "./Pages/Setting";
-import QuizPage from "./Pages/QuizPage"
-import MyRoadmap from "./Pages/MyRoadmap"
-import { ThemeProvider } from "@/components/custom-components/ThemeProvider"
-import { ModeToggle } from "@/components/custom-components/ToggleMode";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import LoginModal  from "./Pages/LoginPopup"
+import PageLayout from "./Layout/PageLayout";
 import { ProtectedRoutes } from "./Routes/Protected.route";
-import { setupInterceptors } from "./Api/AxiosInterceptor";
 import { queryClient } from "./Api/QueryClient";
-import { Toaster } from "sonner"; 
+import { setupInterceptors } from "./Api/AxiosInterceptor";
 
-
-// 2. Inject the client straight into the interceptor setup function
+// Setup axios interceptors once
 setupInterceptors(queryClient);
-function App() {
 
+/* -------------------- Lazy Loaded Pages -------------------- */
 
+const SignupPage = lazy(() => import("./Pages/SingupPage"));
+const LoginPage = lazy(() => import("./Pages/LoginPage"));
+const HomePage = lazy(() => import("./Pages/HomePage"));
+const DashboardPage = lazy(() => import("./Pages/DashboardPage"));
+const Roadmaps = lazy(() => import("./Pages/Roadmaps"));
+const RoadmapDetail = lazy(() => import("./Pages/RoadmapDetail"));
+const TasksPage = lazy(() => import("./Pages/TasksPage"));
+const ResourcePage = lazy(() => import("./Pages/ResourcePage"));
+const ProjectPage = lazy(() => import("./Pages/ProjectPage"));
+const ProjectDetailsPage = lazy(() => import("./Pages/ProjectDetailsPage"));
+const AImentorPage = lazy(() => import("./Pages/AImentorPage"));
+const Setting = lazy(() => import("./Pages/Setting"));
+const QuizPage = lazy(() => import("./Pages/QuizPage"));
+const MyRoadmap = lazy(() => import("./Pages/MyRoadmap"));
+const LoginModal = lazy(() => import("./Pages/LoginPopup"));
+const Dashboard = lazy(() => import("./Pages/admin/Dashboard"));
+/* -------------------- Loading UI -------------------- */
 
+function PageLoader() {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+    <div className="flex h-screen items-center justify-center">
+      <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Suspense fallback={<PageLoader />}>
           <Routes>
+            {/* Public Routes */}
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
 
-            {/* nested routes */}
-            {/* <Route path="/" element={<HomepageLayout/>}> */}
+            {/* Homepage */}
             <Route
               path="/"
               element={
@@ -49,11 +59,13 @@ function App() {
                 </HomepageLayout>
               }
             />
-            {/* </Route> */}
+
+            {/* Dashboard Layout */}
             <Route path="/" element={<PageLayout />}>
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="roadmaps" element={<Roadmaps />} />
               <Route path="roadmap/:id" element={<RoadmapDetail />} />
+
               <Route
                 path="tasks"
                 element={
@@ -62,17 +74,21 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
+
               <Route path="resources" element={<ResourcePage />} />
+              <Route path="projects" element={<ProjectPage />} />
+
               <Route
                 path="projects/:id/detail"
                 element={<ProjectDetailsPage />}
               />
-              <Route path="projects" element={<ProjectPage />} />
+
               <Route path="mentor" element={<AImentorPage />} />
               <Route path="setting" element={<Setting />} />
               <Route path="quiz/:id" element={<QuizPage />} />
+
               <Route
-                path="/my-roadmap"
+                path="my-roadmap"
                 element={
                   <ProtectedRoutes>
                     <MyRoadmap />
@@ -80,12 +96,18 @@ function App() {
                 }
               />
             </Route>
+
+            <Route>
+              <Route path="/admin/" element={<Dashboard/>} />
+            </Route>
           </Routes>
+
           <LoginModal />
-        </BrowserRouter>
-        <Toaster position="top-right" richColors closeButton theme="light" />
-      </QueryClientProvider>
-    </>
+        </Suspense>
+      </BrowserRouter>
+
+      <Toaster position="top-right" richColors closeButton theme="light" />
+    </QueryClientProvider>
   );
 }
 

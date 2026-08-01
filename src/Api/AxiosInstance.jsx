@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiClient = axios.create({
-  baseURL: "https://career-copilot-backened.onrender.com",
+  baseURL: "http://localhost:3000",
   timeout: 5000,
     withCredentials: true,
   

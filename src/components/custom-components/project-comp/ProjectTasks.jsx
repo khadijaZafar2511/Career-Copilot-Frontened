@@ -70,7 +70,7 @@ export default function ProjectTasks({ project }) {
   return (
     <>
       {!isTaskDetail ? (
-        <Card className=" border-none  bg-white max-w-5xl mx-auto lg:max-w-6xl ">
+        <Card className=" border-none  bg-white max-w-5xl mx-auto lg:max-w-6xl md:p-4  ">
           <CardHeader>
             <CardTitle className="text-lg text-slate-900 flex items-center gap-2">
               <Layers className="w-5 h-5 text-indigo-600" />
@@ -78,15 +78,15 @@ export default function ProjectTasks({ project }) {
             </CardTitle>
           </CardHeader>
 
-          <CardContent className="grid grid-cols-5 lg:grid-cols-12 w-full  mr-5 relative ">
-            <div className="flex w-full lg:col-span-12 col-span-5 gap-4 ">
-              <div className="bg-gray-200 w-px  min-h-full mt-15  mb-2"></div>
+          <CardContent className="grid grid-cols-5 lg:grid-cols-12 w-full  mr-1 px-1  relative ">
+            <div className="flex w-full lg:col-span-12 col-span-5 md:gap-4 gap-2   ">
+              <div className="bg-gray-200 w-px  min-h-full md:mt-15 mt-12 ml-1  mb-2"></div>
               <div className="flex w-full  ">
                 {/* Tasks List */}
                 <div className="lg:col-span-12 w-full  space-y-3">
                   {project.tasks.sort((a, b) => a.order - b.order).map((task) => (
                     <div onClick={() => taskDetailHandler(task)}>
-                      <div className=" h-5 w-5  text-[12px]  border bg-foreground rounded-xl absolute left-2 mt-13  text-white text-center"></div>
+                      <div className=" h-4 w-4   text-[12px]  border bg-foreground rounded-xl absolute  left-0     mt-10   md:mt-13  text-white text-center"></div>
                       <div>
                         <button
                           key={task._id}

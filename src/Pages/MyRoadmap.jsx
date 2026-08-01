@@ -1,181 +1,186 @@
+import React, { memo, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Link,useNavigate } from "react-router-dom";
-import { useMyRoadmaps} from "../Features/Roadmap/Roadmap.query"
+import { Link } from "react-router-dom";
+
+import { useMyRoadmaps } from "../Features/Roadmap/Roadmap.query";
 import {
   useResumeRoadmap,
   usePauseRoadmap,
 } from "@/Features/Roadmap/roadmap.mutation";
 
-  function getProgressColor(value) {
-      if (value ==="completed") return "[&>div>div]:bg-green-600";
-      if(value==="paused") return "[&>div>div]:bg-orange-400";
-    if (value ==="active") return "[&>div>div]:bg-blue-600";
-    return "[&>div>div]:bg-red-500";
+const getProgressColor = (status) => {
+  switch (status) {
+    case "completed":
+      return "[&>div>div]:bg-green-600";
+    case "paused":
+      return "[&>div>div]:bg-orange-400";
+    case "active":
+      return "[&>div>div]:bg-blue-600";
+    default:
+      return "[&>div>div]:bg-red-500";
   }
-const style = {
-    completed: "bg-green-50 text-green-700 ",
-    paused: "bg-orange-50 text-orange-400",
-    active:"bg-blue-50 text-blue-700"
-}
-;
+};
 
-function Roadmap({ roadmap }) {
-    const navigate=useNavigate()
-    const { mutate, data: resumeRoadmap, isLoading:isResume } = useResumeRoadmap()
-  const { mutate: mutatePause, data: pauseRoadmap, isLoading: isPause } = usePauseRoadmap()
-  
+const badgeStyles = {
+  completed: "bg-green-50 text-green-700",
+  paused: "bg-orange-50 text-orange-400",
+  active: "bg-blue-50 text-blue-700",
+};
 
-    const pauseHandler = () => {
-        if (roadmap.status === "active") {
-            mutatePause(roadmap._id, {
-                onSuccess: (data) => {
-                    
-                }
-            })
-        }
+const formatDate = (date) =>
+  new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(date));
+
+const Roadmap = memo(function Roadmap({ roadmap }) {
+  const { mutate: resumeRoadmap, isPending: isResume } = useResumeRoadmap();
+  const { mutate: pauseRoadmap, isPending: isPause } = usePauseRoadmap();
+
+  const { _id, status, progress, updatedAt, currentMilestone, roadmapId } =
+    roadmap;
+
+  const { title, description, icon } = roadmapId;
+
+  const pauseHandler = useCallback(() => {
+    if (status === "active") {
+      pauseRoadmap(_id);
     }
-    const resumeHandler = () => {
-        if (roadmap.status === "paused") {
-            mutate(roadmap._id, {
-                onSuccess: (data) => {
-                    // console.log(data)
-                    // navigate(`/roadmap/${roadmap.roadmapId._id}`);
-                }
-            })
-        }
+  }, [_id, status, pauseRoadmap]);
+
+  const resumeHandler = useCallback(() => {
+    if (status === "paused") {
+      resumeRoadmap(_id);
     }
+  }, [_id, status, resumeRoadmap]);
 
-
-    const convertTime = (isoDateString) => {
-         const dateObj = new Date(isoDateString);
-
-         // 1. Simple, human-readable date and time
-         const simpleFormat = new Intl.DateTimeFormat("en-US", {
-           dateStyle: "medium",
-           timeStyle: "short",
-         }).format(dateObj);
-
-        return simpleFormat;
-    }
-    
   return (
-    <Card className="  gap-1 rounded-2xl shadow-sm hover:shadow-md transition py-6 px-2 md:px-4 space-y-6  grid lg:grid-cols-9 md:grid-cols-2 grid-cols-1">
-      <CardHeader className="p-0 lg:col-span-4 ">
+    <Card className="grid grid-cols-1 gap-1 space-y-6 rounded-2xl border border-blue-200 px-2 py-6 shadow-sm transition hover:shadow-md md:grid-cols-2 md:border-none md:px-4 lg:grid-cols-9">
+      <CardHeader className="p-0 lg:col-span-4">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-3xl bg-blue-50 p-3 rounded">
-            {roadmap.roadmapId.icon}
-          </span>
+          <span className="rounded bg-blue-50 p-3 text-3xl">{icon}</span>
 
-          <CardTitle className="text-lg font-semibold flex flex-col  p-0  ">
+          <CardTitle className="flex flex-col p-0 text-lg font-semibold">
             <div>
-              <div className="text-left w-full text-foreground text-xl">
-                {roadmap.roadmapId.title}
+              <div className="w-full text-left text-xl text-foreground">
+                {title}
               </div>
 
-              <p className="text-sm text-muted-foreground  ">
-                {roadmap.roadmapId.description.length > 75
-                  ? roadmap.roadmapId.description.slice(0, 75)
-                  : roadmap.roadmapId.description}
-                .....
+              <p className="text-sm text-muted-foreground">
+                {description.length > 75
+                  ? `${description.slice(0, 75)}...`
+                  : description}
               </p>
             </div>
           </CardTitle>
-
-          {/* <Badge variant="secondary">{roadmap.level}</Badge> */}
         </div>
-        <div className="w-2/3 flex justify-center mt-2">
-          <Badge className={`${style[roadmap.status]} py-3 px-8 `}>
-            {roadmap.status}
-          </Badge>
+
+        <div className="mt-2 flex w-2/3 justify-center">
+          <Badge className={`${badgeStyles[status]} px-8 py-3`}>{status}</Badge>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4 mb-0 lg:col-span-3">
-        <div className="space-y-2 flex flex-col gap-2">
-          <div className="text-foreground font-semibold">
-            <div> Current Milestone :</div>
+      <CardContent className="mb-0 space-y-4 lg:col-span-3">
+        <div className="flex flex-col gap-2">
+          <div className="font-semibold text-foreground">
+            <div>Current Milestone:</div>
+
             <div className="text-xs text-gray-600">
-              {roadmap.currentMilestone.title}
+              {currentMilestone?.title}
             </div>
           </div>
-          <div className="flex  text-md mb-0">
-            <span>Progress:</span>
-            <span className={`font-semibold text-md  ${roadmap.status === ""}`}>
-              {Math.round(roadmap.progress)}%
-            </span>
+
+          <div className="flex text-md">
+            <span>Progress:&nbsp;</span>
+            <span className="font-semibold">{Math.round(progress ?? 0)}%</span>
           </div>
+
           <Progress
-            className={` w-full h-full  ${getProgressColor(roadmap.status)} *:bg-gray-200 `}
-            value={roadmap.progress || 1}
+            value={progress ?? 0}
+            className={`h-full w-full *:bg-gray-200 ${getProgressColor(status)}`}
           />
         </div>
       </CardContent>
+
       <div className="lg:col-span-2">
-        {/* Button */}
-        {roadmap.status === "active" && (
-          <div
-            to={`/roadmap/${roadmap.roadmapId._id}`}
-            className="w-full flex lg:justify-end justify-center px-2"
-          >
+        {status === "active" && (
+          <div className="flex w-full justify-center px-2 lg:justify-end">
             <Button
               onClick={pauseHandler}
               disabled={isPause}
-              className="p-5 w-5/6 hover:text-white hover:bg-foreground mt-4 cursor-pointer  border-blue-600 bg-gray-50  text-foreground"
+              className="mt-4 w-5/6 cursor-pointer border-blue-600 bg-gray-50 p-5 text-foreground hover:bg-foreground hover:text-white"
             >
-              Pause ➔
+              {isPause ? "Pausing..." : "Pause ➜"}
             </Button>
           </div>
         )}
-        {roadmap.status === "paused" && (
-          <div
-            // to={`/roadmap/${roadmap.roadmapId._id}`}
-            className="w-full flex  lg:justify-end justify-center  px-2"
-          >
+
+        {status === "paused" && (
+          <div className="flex w-full justify-center px-2 lg:justify-end">
             <Button
-              onClick={resumeHandler} // 👈 Move onClick here
+              onClick={resumeHandler}
               disabled={isResume}
-              className="p-5 w-2/3 mt-4 cursor-pointer hover:text-white hover:bg-orange-400 border-orange-400 bg-white  text-orange-400"
+              className="mt-4 w-2/3 cursor-pointer border-orange-400 bg-white p-5 text-orange-400 hover:bg-orange-400 hover:text-white"
             >
-              {isResume ? "resuming.." : "Resume ➔"}
+              {isResume ? "Resuming..." : "Resume ➜"}
             </Button>
           </div>
         )}
-        {roadmap.status === "completed" && (
+
+        {status === "completed" && (
           <Link
-            to={`/roadmap/${roadmap.roadmapId._id}`}
-            className="w-full flex lg:justify-end justify-center  px-2"
+            to={`/roadmap/${roadmapId._id}`}
+            className="flex w-full justify-center px-2 lg:justify-end"
           >
-            <Button className="p-5 w-2/3 mt-4 cursor-pointer  border-green-600 hover:bg-green-600 hover:text-white bg-white text-green-600">
-              View Roadmap ➔
+            <Button className="mt-4 w-2/3 cursor-pointer border-green-600 bg-white p-5 text-green-600 hover:bg-green-600 hover:text-white">
+              View Roadmap ➜
             </Button>
           </Link>
         )}
-        <div className="text-xs text-gray-500 mt-2 text-right">
-         🕒  {convertTime(roadmap.updatedAt)}
+
+        <div className="mt-2 text-right text-xs text-gray-500">
+          🕒 {formatDate(updatedAt)}
         </div>
       </div>
     </Card>
   );
-}
-
-
+});
 
 export default function MyRoadmap() {
-       const { data:roadmaps, isLoading, isError } = useMyRoadmaps();
-       if (isLoading) return <div>My roadmaps are loading</div>;
-        // console.log(roadmaps)
-  return (
-    <>
-      <div className="flex flex-col">
-        {roadmaps.map((roadmap) => (
-          <div className="md:px-5 lg:px-10  px-3 py-2" key={roadmap._id}>
-            <Roadmap roadmap={roadmap} />
-          </div>
-        ))}
+  const { data: roadmaps = [], isLoading } = useMyRoadmaps();
+
+  if (isLoading) {
+    return (
+      <div className="mt-25 flex flex-col items-center justify-center">
+        <img
+          src="/loading1.gif"
+          alt="Loading"
+          width={40}
+          height={40}
+          loading="eager"
+        />
       </div>
-    </>
+    );
+  }
+
+  if (roadmaps.length === 0) {
+    return (
+      <div className="py-20 text-center text-muted-foreground">
+        No roadmaps found.
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col">
+      {roadmaps.map((roadmap) => (
+        <div key={roadmap._id} className="px-3 py-2 md:px-5 lg:px-10">
+          <Roadmap roadmap={roadmap} />
+        </div>
+      ))}
+    </div>
   );
 }

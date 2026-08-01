@@ -1,13 +1,4 @@
-// import { createPortal } from "react-dom"
 
-// export default function () {
-//     return createPortal(
-//         <>
-
-//         </>,
-//         document.body
-//     )
-// }
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

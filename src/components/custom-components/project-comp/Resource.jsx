@@ -25,7 +25,7 @@ export default function Resource({ resources }) {
         </div>
 
         {/* Content */}
-        <CardContent className="space-y-1 bg-slate-50 p-4 sm:p-6">
+        <CardContent className="space-y-1 bg-slate-50 px-2 py-3  sm:p-6">
           {resources.map((res) => (
             <div
               key={res._id}

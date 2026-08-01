@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { projectsData } from "../Data/projectdata";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -82,15 +81,9 @@ export default function ProjectPage() {
             {(filteredProjects.length>0)?filteredProjects.map((project) => (
               <Card
                 key={project.id}
-                className="overflow-hidden rounded-md shadow-sm hover:shadow-lg transition p-0"
+                className="border border-blue-200 overflow-hidden rounded-md shadow-sm hover:shadow-lg transition p-0"
               >
-                {/* THUMBNAIL */}
-                {/* <div className="h-40 overflow-hidden">
-                  <img
-                    src={project.thumbnail}
-                    className="w-full h-full object-cover"
-                  />
-                </div> */}
+               
 
                 {/* CONTENT */}
                 <div className="p-4 space-y-3">
@@ -114,13 +107,7 @@ export default function ProjectPage() {
                     ))}
                   </div>
 
-                  {/* PROGRESS */}
-                  <div className="w-full mt-5  bg-gray-200 h-1 rounded-full">
-                    <div
-                      className="h-1 bg-blue-500 rounded-full"
-                      style={{ width: `${project.progress}%` }}
-                    />
-                  </div>
+                 
 
                   {/* ACTIONS */}
                   <div className="flex justify-between pt-2">

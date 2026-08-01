@@ -5,7 +5,10 @@ import  {  useAllRoadmaps } from "../Features/Roadmap/Roadmap.query"
 
 export default function Roadmaps() {
 
-  const { data:roadmapData, isLoading, isError } = useAllRoadmaps()
+  const { data: roadmapData, isLoading, isError } = useAllRoadmaps()
+  if(isLoading) return   <div className="  flex  flex-col mt-25 items-center justify-center ">
+          <img className="h-10 w-10" src="/loading1.gif" />
+        </div>
 
   return (
     <>
