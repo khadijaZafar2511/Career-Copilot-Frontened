@@ -415,7 +415,7 @@ ${msg.role === "user" ? "justify-end" : "md:justify-start "}
                 className={`
 
 md:max-w-[75%]
-max-w-[90%]
+max-w-[100%]
 px-4
 py-3
 rounded-2xl

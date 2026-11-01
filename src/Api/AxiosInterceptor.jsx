@@ -5,8 +5,13 @@ let isRefreshing = false;
 let failedQueue = [];
 
 export const processQueue = (error) => {
-  failedQueue.forEach(({ reject }) => reject(error));
-  failedQueue = [];
+
+// Execute the waiting requests using the fresh session
+failedQueue.forEach(({ resolve }) => resolve(apiClient(originalRequest)));
+failedQueue = [];
+
+return apiClient(originalRequest);
+
 };
 
 export const setupInterceptors = (queryClient) => {

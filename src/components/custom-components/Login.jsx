@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useLogin } from "@/Features/Auth/auth.mutation";
 import { useCurrentUser } from "@/Features/Auth/auth.query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link} from "react-router-dom";
 import { useEffect } from "react";
 export default function Login({ onLoginSuccess }) {
 const navigate=useNavigate()
@@ -71,7 +71,7 @@ const navigate=useNavigate()
       >
         {isPending ? "Logging in..." : "Login"}
       </Button>
-      <div>Don't have an account? <a href="/signup" className="text-foreground">Signup</a></div>
+      <div>Don't have an account? <Link to="/signup" className="text-foreground">Signup</Link></div>
     </form>
   );
 }
