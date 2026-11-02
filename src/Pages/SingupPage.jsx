@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useSignUp } from "@/Features/Auth/auth.mutation";
+import { Link } from "react-router-dom";
 export default function SignupPage() {
 
 
@@ -101,7 +102,7 @@ export default function SignupPage() {
             >
               {isPending ? "Creating account..." : "Sign Up"}
             </Button>
-            <div>Already have an account?<a className="text-foreground " href="/login"> Login</a></div>
+            <div>Already have an account?<Link className="text-foreground " href="/login"> Login</Link></div>
           </form>
         </CardContent>
       </Card>
