@@ -102,7 +102,7 @@ export default function SignupPage() {
             >
               {isPending ? "Creating account..." : "Sign Up"}
             </Button>
-            <div>Already have an account?<Link className="text-foreground " href="/login"> Login</Link></div>
+            <div>Already have an account?<Link className="text-foreground " to="/login"> Login</Link></div>
           </form>
         </CardContent>
       </Card>
