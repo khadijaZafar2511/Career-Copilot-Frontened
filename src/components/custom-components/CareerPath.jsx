@@ -23,12 +23,34 @@ export default function CareerPath({ setActiveTab, setFilledtab,selected, setSel
     // }));
   };
   useEffect(() => {
-    setSelected(
-      JSON.parse(localStorage.getItem("selected"))
-        ? JSON.parse(localStorage.getItem("selected"))
-        : {},
-    );
+    const savedData = localStorage.getItem("selected");
+
+    if (savedData) {
+      try {
+        // Pehle try karein ke agar valid stringified JSON object hai
+        const parsedData = JSON.parse(savedData);
+        setSelected(
+          typeof parsedData === "object" && parsedData !== null
+            ? parsedData
+            : {},
+        );
+      } catch (e) {
+        // Agar direct plain text string mili (jaise "AI Engineer"), toh crash hone ke bajaye directly target set karein
+        console.warn(
+          "Found raw string instead of JSON object in localStorage, safely recovering.",
+        );
+
+        // Match from existing data array or fallback gracefully
+        const matchedCard = careerPaths.find(
+          (path) => path.title === savedData,
+        );
+        setSelected(matchedCard || { title: savedData });
+      }
+    } else {
+      setSelected({});
+    }
   }, []);
+
   return (
     <>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-3">
@@ -163,44 +185,3 @@ export default function CareerPath({ setActiveTab, setFilledtab,selected, setSel
   );
 }
 
-//  <div className="bg-blue-100 text-gray-800 h-20 w-30 flex flex-col items-center justify-center ">
-//    <span>Job Growth</span> <div className="font-bold">{card.jobGrowth}</div>
-//  </div>;
-//  <div className="grid md:grid-cols-2  grid-cols-1 gap-3">
-//    {careerPaths.map((card) => {
-//      //   const Icon = card.avator;
-//      return (
-//        <div
-//          key={card.title}
-//          className="hover:border-blue-500 border border-blue-200 rounded-lg"
-//        >
-//          <Card className="p-4 flex flex-row">
-//            <div>
-//              <div className="bg-blue-100 flex items-center justify-center rounded-lg h-11 w-11">
-//                {/* <Icon className="h-6 w-6 text-blue-600 rounded-lg" /> */}
-//                {card.icon}
-//              </div>
-//            </div>
-
-//            <div>
-//              <CardTitle className="font-semibold">{card.title}</CardTitle>
-//              <CardContent className="text-[12px] p-1">
-//                <span>{card.shortDescription}</span>
-//                <div className="flex gap-3 mt-4">
-//                  <Badge className="bg-orange-50 text-orange-500 p-2">
-//                    {card.difficultyLevel}
-//                  </Badge>
-//                  <Badge className="bg-blue-50 text-blue-600 p-2">
-//                    {card.estimatedDuration}
-//                  </Badge>
-//                  <Badge className="bg-green-50 text-green-600 p-2">
-//                    {card.jobGrowth}
-//                  </Badge>
-//                </div>
-//              </CardContent>
-//            </div>
-//          </Card>
-//        </div>
-//      );
-//    })}
-//  </div>;
