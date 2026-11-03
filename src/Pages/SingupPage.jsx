@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useSignUp } from "@/Features/Auth/auth.mutation";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 export default function SignupPage() {
-
+const navigate=useNavigate()
 
 
   const {
@@ -25,7 +25,8 @@ export default function SignupPage() {
     mutate(data, {
     onSuccess: () => {
       toast.dismiss();
-      toast.success("Registered successfully!!");
+        toast.success("Registered successfully!!");
+        navigate("/login")
     },
     onError: (error) => {
       toast.dismiss();

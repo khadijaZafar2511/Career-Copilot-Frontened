@@ -12,15 +12,19 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Separator } from "../ui/separator"
-export default function CareerPath({ setActiveTab, setFilledtab,selected, setSelected }) {
+export default function CareerPath({ setActiveTab, setFilledtab,selected, setSelected  ,setGoalData, goalData}) {
 
 
   const handleSelected = (cardDetail) => {
     localStorage.setItem("selected", JSON.stringify(cardDetail));
     setSelected(cardDetail)
-    // setSelected(prev => ({
-    //   ...prev, title:titl, description:shortDescription
-    // }));
+     const updatedGoalData = {
+       ...goalData,
+       roadmapId: cardDetail.id,
+     };
+    setGoalData(updatedGoalData);
+    localStorage.setItem("goaldata", JSON.stringify(updatedGoalData));
+   
   };
   useEffect(() => {
     const savedData = localStorage.getItem("selected");

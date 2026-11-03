@@ -13,7 +13,7 @@ import {
 
 export const careerPaths = [
   {
-    id: "frontend",
+    id: "6a4f8cb9a33e3801a2d283bb",
 
     title: "Frontend Developer",
 
@@ -69,7 +69,7 @@ export const careerPaths = [
   },
 
   {
-    id: "backend",
+    id: "6a4f8cb9a33e3801a2d283bc",
 
     title: "Backend Developer",
 
@@ -122,7 +122,7 @@ export const careerPaths = [
   },
 
   {
-    id: "fullstack",
+    id: "6a4f8cb9a33e3801a2d283bd",
 
     title: "Full Stack Developer",
 
@@ -173,7 +173,7 @@ export const careerPaths = [
   },
 
   {
-    id: "ai",
+    id: "6a4f8cb9a33e3801a2d283be",
 
     title: "AI / Machine Learning Engineer",
 
@@ -226,7 +226,7 @@ export const careerPaths = [
   },
 
   {
-    id: "devops",
+    id: "6a4f8cb9a33e3801a2d283bf",
 
     title: "DevOps Engineer",
 
@@ -270,154 +270,4 @@ export const careerPaths = [
     industries: ["Cloud", "Finance", "Software"],
   },
 
-  {
-    id: "cyber",
-
-    title: "Cybersecurity Engineer",
-
-    icon: <ShieldCheck className="h-6 w-6 text-red-600" />,
-
-    category: "Cyber Security",
-
-    shortDescription:
-      "Protect applications, systems and networks against cyber threats.",
-
-    description:
-      "Cybersecurity professionals secure digital infrastructure through ethical hacking, monitoring and security engineering.",
-
-    difficultyLevel: "Advanced",
-
-    estimatedDuration: "10-14 Months",
-
-    jobGrowth: "High",
-
-    averageSalary: {
-      min: "70,000",
-      max: "150,000",
-      currency: "USD/Year",
-    },
-
-    requiredSkills: [
-      "Networking",
-      "Linux",
-      "Security",
-      "OWASP",
-      "Pen Testing",
-      "Cryptography",
-    ],
-
-    tools: ["Wireshark", "Burp Suite", "Metasploit", "Nmap"],
-
-    roadmapTopics: [
-      "Networking",
-      "Linux",
-      "Ethical Hacking",
-      "Web Security",
-      "Cloud Security",
-    ],
-
-    jobTitles: [
-      "Cybersecurity Engineer",
-      "Security Analyst",
-      "Penetration Tester",
-    ],
-
-    industries: ["Government", "Finance", "Healthcare"],
-  },
-
-  {
-    id: "mobile",
-
-    title: "Mobile App Developer",
-
-    icon: <Smartphone className="h-6 w-6 text-orange-600" />,
-
-    category: "Mobile Development",
-
-    shortDescription:
-      "Develop Android and iOS applications using Flutter or React Native.",
-
-    description:
-      "Mobile developers create cross-platform and native mobile applications.",
-
-    difficultyLevel: "Intermediate",
-
-    estimatedDuration: "8-10 Months",
-
-    jobGrowth: "High",
-
-    averageSalary: {
-      min: "55,000",
-      max: "115,000",
-      currency: "USD/Year",
-    },
-
-    requiredSkills: ["Flutter", "React Native", "Firebase", "REST APIs"],
-
-    tools: ["Android Studio", "Xcode", "Firebase"],
-
-    roadmapTopics: [
-      "Flutter",
-      "React Native",
-      "State Management",
-      "Deployment",
-    ],
-
-    jobTitles: [
-      "Mobile Developer",
-      "Flutter Developer",
-      "React Native Developer",
-    ],
-
-    industries: ["Startups", "Healthcare", "Education"],
-  },
-
-  {
-    id: "uiux",
-
-    title: "UI / UX Designer",
-
-    icon: <Palette className="h-6 w-6 text-indigo-600" />,
-
-    category: "Design",
-
-    shortDescription:
-      "Design intuitive and visually appealing digital experiences.",
-
-    description:
-      "UI/UX designers research users, create wireframes, prototypes and beautiful interfaces.",
-
-    difficultyLevel: "Beginner",
-
-    estimatedDuration: "5-7 Months",
-
-    jobGrowth: "High",
-
-    averageSalary: {
-      min: "45,000",
-      max: "95,000",
-      currency: "USD/Year",
-    },
-
-    requiredSkills: [
-      "Figma",
-      "Wireframing",
-      "Prototyping",
-      "User Research",
-      "Design Systems",
-    ],
-
-    tools: ["Figma", "Adobe XD", "Miro"],
-
-    roadmapTopics: [
-      "Design Principles",
-      "Typography",
-      "Color Theory",
-      "UX Research",
-    ],
-
-    jobTitles: ["UI Designer", "UX Designer", "Product Designer"],
-
-    industries: ["Software", "Gaming", "Healthcare"],
-  },
 ];

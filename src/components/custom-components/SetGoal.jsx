@@ -3,7 +3,8 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { FaSun, FaMoon, FaCloudSun } from "react-icons/fa";
 import { FaRocket, FaRegClock, FaLeaf } from 'react-icons/fa';
-import {Button} from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
+import { useEffect } from "react";
 export default function SetGoal({ selected, setActiveTab, setFilledtab, setGoalData , goalData }) {
  
   const studyTimeData = [
@@ -47,6 +48,10 @@ export default function SetGoal({ selected, setActiveTab, setFilledtab, setGoalD
     },
   ];
   const [hours, setHours] = useState(5);
+  useEffect(() => {
+    localStorage.setItem("goaldata", JSON.stringify(goalData));
+   
+   },[goalData])
   // console.log(goalData);
   return (
     <>

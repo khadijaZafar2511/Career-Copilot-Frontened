@@ -6,22 +6,38 @@ import { useNavigate } from "react-router-dom";
 const StartLearning = ({ goalData, setFilledtab ,selected}) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const[sgoalData,setSgoalData]=useState()
 
-  useEffect(() => {
-    setShowModal(true);
-  }, []);
+   useEffect(() => {
+     setShowModal(true);
+
+     // 1. Get the raw string from localStorage using the plain key name
+     const savedData = localStorage.getItem("goaldata");
+
+     // 2. Parse it only if it exists, otherwise default to null or an empty object
+     if (savedData) {
+       try {
+         setSgoalData(JSON.parse(savedData));
+       } catch (error) {
+         console.error("Error parsing goaldata:", error);
+         setSgoalData(null);
+       }
+     }
+   }, []);
+
 
   const handleStartLearning = () => {
+    console.log(sgoalData)
     setShowModal(false);
 setFilledtab((prev)=>prev.find((tab)=>tab==4)?[...prev]:[...prev, 4])
-    navigate(`/roadmaps/${goalData.roadmapId?goalData.roadmapId:selected.slug}`, {
+    navigate(`/roadmap/${sgoalData.roadmapId?sgoalData.roadmapId:selected.slug}`, {
       state: {
-        career: goalData.career ? goalData.career : selected.title  ,
-             skillLevel: goalData.skillLevel,
-        weeklyHours: goalData.weeklyHours,
-        timeline: goalData.timeline,
-        TargetPace: goalData.TargetPace,
-        dailyReminder: goalData.dailyReminder,
+        career: sgoalData.career ? sgoalData.career : selected.title  ,
+             skillLevel: sgoalData.skillLevel,
+        weeklyHours: sgoalData.weeklyHours,
+        timeline: sgoalData.timeline,
+        TargetPace: sgoalData.TargetPace,
+        dailyReminder: sgoalData.dailyReminder,
       },
     });
   };

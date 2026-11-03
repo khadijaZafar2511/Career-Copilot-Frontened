@@ -71,7 +71,7 @@ const navigate=useNavigate()
       >
         {isPending ? "Logging in..." : "Login"}
       </Button>
-      <div>Don't have an account? <Link to="/signup" className="text-foreground">Signup</Link></div>
+      <div>Don't have an account? <Link onClick={()=>onLoginSuccess()} to="/signup" className="text-foreground">Signup</Link></div>
     </form>
   );
 }
