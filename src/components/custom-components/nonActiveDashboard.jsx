@@ -26,7 +26,7 @@ export default function NonActiveDashboard() {
 
   const [goalData, setGoalData] = useState({
     career: selected ? selected.title : "",
-    roadmapId: selected ? selected.slug : "",
+    roadmapId: selected ? selected.id : "",
     skillLevel: "beginner",
     TargetPace: "",
     weeklyHours: "",
@@ -47,7 +47,7 @@ export default function NonActiveDashboard() {
     setGoalData((prev) => ({
       ...prev,
       career: selected?.title || "",
-      roadmapId: selected?.slug || "",
+      roadmapId: selected?.id || "",
     }));
   }, [selected]);
 

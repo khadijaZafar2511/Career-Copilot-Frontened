@@ -23,6 +23,7 @@ export default function CareerPath({ setActiveTab, setFilledtab,selected, setSel
        roadmapId: cardDetail.id,
      };
     setGoalData(updatedGoalData);
+    console.log(updatedGoalData)
     localStorage.setItem("goaldata", JSON.stringify(updatedGoalData));
    
   };
